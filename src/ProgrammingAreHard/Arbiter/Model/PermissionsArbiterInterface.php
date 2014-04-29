@@ -18,7 +18,7 @@ interface PermissionsArbiterInterface
     /**
      * Set the permission to grant.
      *
-     * @param string[] $permissions
+     * @param string|string[] $permissions
      * @return $this
      */
     public function setPermissions($permissions);
