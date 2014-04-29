@@ -1,7 +1,5 @@
 <?php
 
-namespace ProgrammingAreHard\Arbiter\Tests\stubs;
-
 class Entity
 {
     private $id;

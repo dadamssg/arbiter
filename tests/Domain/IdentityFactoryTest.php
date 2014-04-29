@@ -3,7 +3,6 @@
 namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 
 use ProgrammingAreHard\Arbiter\Domain\IdentityFactory;
-use ProgrammingAreHard\Arbiter\Tests\stubs\Entity;
 use Symfony\Component\Security\Acl\Model\ObjectIdentityInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 
@@ -27,7 +26,7 @@ class IdentityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($identity instanceof ObjectIdentityInterface);
         $this->assertEquals(7, $identity->getIdentifier());
-        $this->assertEquals('ProgrammingAreHard\Arbiter\Tests\stubs\Entity', $identity->getType());
+        $this->assertEquals('ProgrammingAreHard\Arbiter\Tests\Domain\Entity', $identity->getType());
     }
 
     public function testCanMakeUserIdentity()
@@ -44,4 +43,19 @@ class IdentityFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(get_class($user), $identity->getClass());
 
     }
-} 
+}
+
+class Entity
+{
+    private $id;
+
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+}
