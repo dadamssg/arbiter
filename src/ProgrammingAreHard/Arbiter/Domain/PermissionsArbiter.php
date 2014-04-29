@@ -73,5 +73,4 @@ class PermissionsArbiter implements PermissionsArbiterInterface
     {
         // TODO: Implement isGranted() method.
     }
-
 } 
