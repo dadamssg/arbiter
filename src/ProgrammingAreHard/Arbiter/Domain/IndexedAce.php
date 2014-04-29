@@ -19,7 +19,7 @@ class IndexedAce
     /**
      * Constructor.
      *
-     * @param $index
+     * @param int $index
      * @param EntryInterface $ace
      */
     public function __construct($index, EntryInterface $ace)
