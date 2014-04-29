@@ -14,8 +14,6 @@ class IndexedAceResolver implements IndexedAceResolverInterface
      */
     public function resolveIndexedAce(AclInterface $acl, SecurityIdentityInterface $sid)
     {
-        $this->index = null;
-
         foreach ($acl->getObjectAces() as $index => $ace) {
             if ($ace->getSecurityIdentity()->equals($sid)) {
                 return new IndexedAce($index, $ace);
