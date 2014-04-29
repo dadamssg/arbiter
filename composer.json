@@ -1,0 +1,31 @@
+{
+    "name": "ProgrammingAreHard/Arbiter",
+    "license": "MIT",
+    "type": "library",
+    "description": "Convenience library to manipulate Symfony ACL's",
+    "authors": [
+        {
+            "name": "David Adams",
+            "email": "adams.david.10@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "ProgrammingAreHard\\Arbiter": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+    	"symfony/security": "2.4.*",
+    	"phpunit/phpunit": "~4.0"
+    },
+    "minimum-stability": "dev",
+    "target-dir": "ProgrammingAreHard/Arbiter",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}
