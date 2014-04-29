@@ -3,6 +3,8 @@
 namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 
 use ProgrammingAreHard\Arbiter\Domain\AceResolver;
+use ProgrammingAreHard\Arbiter\Domain\IndexedAce;
+use Symfony\Component\Security\Acl\Model\EntryInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 
 class AceResolverTest extends \PHPUnit_Framework_TestCase
@@ -64,9 +66,9 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
             ->method('getObjectAces')
             ->willReturn($aces);
 
-        $ace = $this->aceResolver->resolveAce($acl, $sid);
-        $this->assertSame($ace, $aces[0]);
-        $this->assertSame(0, $this->aceResolver->getAceIndex());
+        $indexedAce = $this->aceResolver->resolveAce($acl, $sid);
+        $this->assertTrue($indexedAce->getAce() instanceof EntryInterface);
+        $this->assertSame(0, $indexedAce->getIndex());
     }
 
     private function getAcesWithOneMatching(SecurityIdentityInterface $sid)

@@ -10,13 +10,6 @@ use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 class AceResolver implements AceResolverInterface
 {
     /**
-     * ACE index.
-     *
-     * @var int
-     */
-    private $index;
-
-    /**
      * {@inheritdoc}
      */
     public function resolveAce(AclInterface $acl, SecurityIdentityInterface $sid)
@@ -25,19 +18,10 @@ class AceResolver implements AceResolverInterface
 
         foreach ($acl->getObjectAces() as $index => $ace) {
             if ($ace->getSecurityIdentity()->equals($sid)) {
-                $this->index = $index;
-                return $ace;
+                return new IndexedAce($index, $ace);
             }
         }
 
         throw new NoAceFoundException;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAceIndex()
-    {
-        return $this->index;
     }
 } 

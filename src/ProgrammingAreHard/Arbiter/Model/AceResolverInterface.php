@@ -12,15 +12,8 @@ interface AceResolverInterface
      *
      * @param AclInterface $acl
      * @param SecurityIdentityInterface $sid
-     * @return \Symfony\Component\Security\Acl\Model\EntryInterface
+     * @return \ProgrammingAreHard\Arbiter\Domain\IndexedAce
      * @throws \Symfony\Component\Security\Acl\Exception\NoAceFoundException
      */
     public function resolveAce(AclInterface $acl, SecurityIdentityInterface $sid);
-
-    /**
-     * Get the found ACE's index.
-     *
-     * @return int
-     */
-    public function getAceIndex();
 } 
