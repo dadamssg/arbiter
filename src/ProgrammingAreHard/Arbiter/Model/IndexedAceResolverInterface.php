@@ -5,7 +5,7 @@ namespace ProgrammingAreHard\Arbiter\Model;
 use Symfony\Component\Security\Acl\Model\AclInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 
-interface AceResolverInterface
+interface IndexedAceResolverInterface
 {
     /**
      * Find the ACE from the ACL and security identity.

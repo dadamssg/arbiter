@@ -2,7 +2,7 @@
 
 namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 
-use ProgrammingAreHard\Arbiter\Domain\AceResolver;
+use ProgrammingAreHard\Arbiter\Domain\IndexedAceResolver;
 use ProgrammingAreHard\Arbiter\Domain\IndexedAce;
 use Symfony\Component\Security\Acl\Model\EntryInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
@@ -10,13 +10,13 @@ use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 class AceResolverTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AceResolver
+     * @var IndexedAceResolver
      */
     private $aceResolver;
 
     public function setUp()
     {
-        $this->aceResolver = new AceResolver;
+        $this->aceResolver = new IndexedAceResolver;
     }
 
     /**

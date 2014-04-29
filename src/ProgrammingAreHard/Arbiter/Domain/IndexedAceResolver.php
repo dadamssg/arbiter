@@ -2,12 +2,12 @@
 
 namespace ProgrammingAreHard\Arbiter\Domain;
 
-use ProgrammingAreHard\Arbiter\Model\AceResolverInterface;
+use ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface;
 use Symfony\Component\Security\Acl\Exception\NoAceFoundException;
 use Symfony\Component\Security\Acl\Model\AclInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 
-class AceResolver implements AceResolverInterface
+class IndexedAceResolver implements IndexedAceResolverInterface
 {
     /**
      * {@inheritdoc}
