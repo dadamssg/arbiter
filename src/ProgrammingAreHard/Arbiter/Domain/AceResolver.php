@@ -40,5 +40,4 @@ class AceResolver implements AceResolverInterface
     {
         return $this->index;
     }
-
 } 
