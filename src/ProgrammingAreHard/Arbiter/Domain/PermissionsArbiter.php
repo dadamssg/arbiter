@@ -4,7 +4,7 @@ namespace ProgrammingAreHard\Arbiter\Domain;
 
 use ProgrammingAreHard\Arbiter\Model\MasksAggregatorInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsArbiterInterface;
-use string;
+use Symfony\Component\Security\Acl\Model\MutableAclProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class PermissionsArbiter implements PermissionsArbiterInterface
@@ -17,12 +17,20 @@ class PermissionsArbiter implements PermissionsArbiterInterface
     private $object;
 
     /**
+     * @var MutableAclProviderInterface
+     */
+    private $aclProvider;
+
+    /**
      * @var MasksAggregator
      */
     private $masksAggregator;
 
-    public function __construct(MasksAggregatorInterface $maskAggregator = null)
-    {
+    public function __construct(
+        MutableAclProviderInterface $aclProvider,
+        MasksAggregatorInterface $maskAggregator = null
+    ) {
+        $this->aclProvider = $aclProvider;
         $this->masksAggregator = $maskAggregator ? $maskAggregator : new MasksAggregator;
     }
 
@@ -34,10 +42,12 @@ class PermissionsArbiter implements PermissionsArbiterInterface
         if (!is_object($object)) {
             throw new \InvalidArgumentException(sprintf(
                 'PermissionsArbiter expected object. %s given',
-                gettype($object)));
+                gettype($object)
+            ));
         }
 
         $this->object = $object;
+
         return $this;
     }
 
@@ -47,6 +57,7 @@ class PermissionsArbiter implements PermissionsArbiterInterface
     public function setPermissions($permissions)
     {
         $this->masksAggregator->setPermissions($permissions);
+
         return $this;
     }
 

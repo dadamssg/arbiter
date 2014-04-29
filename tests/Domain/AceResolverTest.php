@@ -3,7 +3,6 @@
 namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 
 use ProgrammingAreHard\Arbiter\Domain\IndexedAceResolver;
-use ProgrammingAreHard\Arbiter\Domain\IndexedAce;
 use Symfony\Component\Security\Acl\Model\EntryInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 

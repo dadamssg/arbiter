@@ -183,7 +183,7 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
             ->willReturn($secondSet);
 
         $result = $this->aggregator->getAllMasks($object);
-        $this->assertSame(array(1,2,3), array_values($result));
+        $this->assertSame(array(1, 2, 3), array_values($result));
     }
 
     public function testNoPermissionsReturnsEmptyArray()

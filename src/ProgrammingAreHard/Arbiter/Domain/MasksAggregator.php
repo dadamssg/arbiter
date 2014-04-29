@@ -63,6 +63,7 @@ class MasksAggregator implements MasksAggregatorInterface
         }
 
         $this->permissions = $permissions;
+
         return $this;
     }
 
@@ -74,10 +75,12 @@ class MasksAggregator implements MasksAggregatorInterface
         if (self::MASK_ADD !== $mode && self::MASK_REMOVE !== $mode) {
             throw new \InvalidArgumentException(sprintf(
                 'Unsupported permission build mode. Supported modes: %1$s::MASK_ADD, %1$s::MASK_REMOVE',
-                get_class($this)));
+                get_class($this)
+            ));
         }
 
         $this->mode = $mode;
+
         return $this;
     }
 
