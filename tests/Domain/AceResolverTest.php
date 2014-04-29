@@ -33,7 +33,7 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
 
         $sid = $this->newSid();
 
-        $this->aceResolver->resolveAce($acl, $sid);
+        $this->aceResolver->resolveIndexedAce($acl, $sid);
     }
 
     /**
@@ -50,7 +50,7 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
 
         $sid = $this->newSid();
 
-        $this->aceResolver->resolveAce($acl, $sid);
+        $this->aceResolver->resolveIndexedAce($acl, $sid);
     }
 
     public function testIndexGetsSetWhenAceIsResolved()
@@ -66,7 +66,7 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
             ->method('getObjectAces')
             ->willReturn($aces);
 
-        $indexedAce = $this->aceResolver->resolveAce($acl, $sid);
+        $indexedAce = $this->aceResolver->resolveIndexedAce($acl, $sid);
         $this->assertTrue($indexedAce->getAce() instanceof EntryInterface);
         $this->assertSame(0, $indexedAce->getIndex());
     }

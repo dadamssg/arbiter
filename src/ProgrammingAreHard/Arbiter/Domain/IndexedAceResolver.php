@@ -12,7 +12,7 @@ class IndexedAceResolver implements IndexedAceResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolveAce(AclInterface $acl, SecurityIdentityInterface $sid)
+    public function resolveIndexedAce(AclInterface $acl, SecurityIdentityInterface $sid)
     {
         $this->index = null;
 

@@ -15,5 +15,5 @@ interface IndexedAceResolverInterface
      * @return \ProgrammingAreHard\Arbiter\Domain\IndexedAce
      * @throws \Symfony\Component\Security\Acl\Exception\NoAceFoundException
      */
-    public function resolveAce(AclInterface $acl, SecurityIdentityInterface $sid);
+    public function resolveIndexedAce(AclInterface $acl, SecurityIdentityInterface $sid);
 } 
