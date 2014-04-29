@@ -10,12 +10,18 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 
     private $aclProvider;
 
+    private $aceResolver;
+
+    private $identityFactory;
+
     private $masksAggregator;
 
     public function setUp()
     {
         $this->arbiter = new PermissionsArbiter(
             $this->aclProvider = $this->getMock('Symfony\Component\Security\Acl\Model\MutableAclProviderInterface'),
+            $this->aceResolver = $this->getMock('ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface'),
+            $this->identityFactory = $this->getMock('ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface'),
             $this->masksAggregator = $this->getMock('ProgrammingAreHard\Arbiter\Model\MasksAggregatorInterface')
         );
     }

@@ -14,7 +14,7 @@ interface IdentityFactoryInterface
     public function getObjectIdentity($object);
 
     /**
-     * Get security identity.
+     * Get user identity.
      *
      * @return \Symfony\Component\Security\Acl\Model\SecurityIdentityInterface
      */
