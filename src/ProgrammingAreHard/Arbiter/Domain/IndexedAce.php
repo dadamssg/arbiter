@@ -7,11 +7,15 @@ use Symfony\Component\Security\Acl\Model\EntryInterface;
 class IndexedAce
 {
     /**
+     * The ACE's index.
+     *
      * @var int
      */
     private $index;
 
     /**
+     * The ACE.
+     *
      * @var \Symfony\Component\Security\Acl\Model\EntryInterface
      */
     private $ace;
