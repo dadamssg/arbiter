@@ -37,7 +37,7 @@ class PermissionsArbiter implements PermissionsArbiterInterface
     /**
      * @var MaskAggregator
      */
-    private $masksAggregator;
+    private $maskAggregator;
 
     /**
      * Constructor.
@@ -56,7 +56,7 @@ class PermissionsArbiter implements PermissionsArbiterInterface
         $this->aclProvider = $aclProvider;
         $this->aceResolver = $aceResolver ? $aceResolver : new IndexedAceResolver;
         $this->identityFactory = $identityFactory ? $identityFactory : new IdentityFactory;
-        $this->masksAggregator = $maskAggregator ? $maskAggregator : new MaskAggregator;
+        $this->maskAggregator = $maskAggregator ? $maskAggregator : new MaskAggregator;
     }
 
     /**
@@ -74,7 +74,7 @@ class PermissionsArbiter implements PermissionsArbiterInterface
      */
     public function setPermissions($permissions)
     {
-        $this->masksAggregator->setPermissions($permissions);
+        $this->maskAggregator->setPermissions($permissions);
 
         return $this;
     }
@@ -97,11 +97,11 @@ class PermissionsArbiter implements PermissionsArbiterInterface
             $indexedAce = $this->aceResolver->resolveIndexedAce($acl, $userIdentity);
 
             $initialMask = $indexedAce->getAce()->getMask();
-            $mask = $this->masksAggregator->build($initialMask);
+            $mask = $this->maskAggregator->build($initialMask);
 
             $acl->updateObjectAce($indexedAce->getIndex(), $mask);
         } catch (NoAceFoundException $e) {
-            $acl->insertObjectAce($userIdentity, $this->masksAggregator->build());
+            $acl->insertObjectAce($userIdentity, $this->maskAggregator->build());
         }
 
         $this->aclProvider->updateAcl($acl);
@@ -118,7 +118,7 @@ class PermissionsArbiter implements PermissionsArbiterInterface
             $indexedAce = $this->aceResolver->resolveIndexedAce($acl, $userIdentity);
 
             $initialMask = $indexedAce->getAce()->getMask();
-            $mask = $this->masksAggregator
+            $mask = $this->maskAggregator
                 ->setMode(MaskAggregator::MASK_REMOVE)
                 ->build($initialMask);
 
@@ -134,7 +134,7 @@ class PermissionsArbiter implements PermissionsArbiterInterface
      */
     public function isGranted(UserInterface $user)
     {
-        if ($masks = $this->masksAggregator->getAllMasks(new \stdClass)) {
+        if ($masks = $this->maskAggregator->getAllMasks(new \stdClass)) {
 
             try {
                 $acl = $this->aclProvider->findAcl($this->objectIdentity);

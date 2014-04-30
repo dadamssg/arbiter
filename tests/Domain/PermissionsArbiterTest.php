@@ -44,7 +44,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
     /**
      * @var MaskAggregator
      */
-    private $masksAggregator;
+    private $maskAggregator;
 
     /**
      * @var ObjectIdentityInterface
@@ -82,7 +82,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
             $this->aclProvider = $this->getMock('Symfony\Component\Security\Acl\Model\MutableAclProviderInterface'),
             $this->aceResolver = $this->getMock('ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface'),
             $this->identityFactory = $this->getMock('ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface'),
-            $this->masksAggregator = $this->getMock('ProgrammingAreHard\Arbiter\Model\MaskAggregatorInterface')
+            $this->maskAggregator = $this->getMock('ProgrammingAreHard\Arbiter\Model\MaskAggregatorInterface')
         );
 
         $this->objectIdentity = $this->getMock('Symfony\Component\Security\Acl\Model\ObjectIdentityInterface');
@@ -290,7 +290,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 
     private function getAllMasksFromAggregatorWillReturn($permissions)
     {
-        $this->masksAggregator
+        $this->maskAggregator
             ->expects($this->once())
             ->method('getAllMasks')
             ->with($this->anything())
@@ -309,11 +309,11 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
     private function expectMaskToBeBuiltWithAce($mode = MaskAggregator::MASK_ADD)
     {
         if (MaskAggregator::MASK_REMOVE == $mode) {
-            $this->masksAggregator
+            $this->maskAggregator
                 ->expects($this->once())
                 ->method('setMode')
                 ->with(MaskAggregator::MASK_REMOVE)
-                ->willReturn($this->masksAggregator);
+                ->willReturn($this->maskAggregator);
         }
 
         $this->ace
@@ -321,7 +321,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
             ->method('getMask')
             ->willReturn(self::MASK);
 
-        $this->masksAggregator
+        $this->maskAggregator
             ->expects($this->once())
             ->method('build')
             ->with(self::MASK)
@@ -330,7 +330,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 
     private function expectMaskToBeBuiltWithoutAce()
     {
-        $this->masksAggregator
+        $this->maskAggregator
             ->expects($this->once())
             ->method('build')
             ->willReturn(self::MASK);
@@ -416,7 +416,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 
     private function expectMaskAggregatorsPermissionsToBeSet($permissions)
     {
-        $this->masksAggregator
+        $this->maskAggregator
             ->expects($this->once())
             ->method('setPermissions')
             ->with($this->equalTo($permissions));
