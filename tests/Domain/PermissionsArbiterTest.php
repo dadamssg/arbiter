@@ -111,7 +111,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
     public function permissions_get_set_on_mask_aggregator()
     {
         $permissions = array('VIEW', 'EDIT');
-        $this->expectMaskAggretorsPermissionsSet($permissions);
+        $this->expectMaskAggregatorsPermissionsToBeSet($permissions);
 
         $result = $this->arbiter->setPermissions($permissions);
         $this->assertSame($this->arbiter, $result);
@@ -414,7 +414,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
             ->will($this->throwException(new NoAceFoundException));
     }
 
-    private function expectMaskAggretorsPermissionsSet($permissions)
+    private function expectMaskAggregatorsPermissionsToBeSet($permissions)
     {
         $this->masksAggregator
             ->expects($this->once())
