@@ -24,6 +24,9 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
      */
     private $userIdentity;
 
+    /**
+     * Setup.
+     */
     public function setUp()
     {
         $this->aceResolver = new IndexedAceResolver;

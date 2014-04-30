@@ -14,6 +14,9 @@ class IdentityFactoryTest extends \PHPUnit_Framework_TestCase
      */
     private $factory;
 
+    /**
+     * Setup.
+     */
     public function setUp()
     {
         $this->factory = new IdentityFactory;
