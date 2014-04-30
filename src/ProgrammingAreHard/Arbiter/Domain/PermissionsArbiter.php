@@ -4,21 +4,20 @@ namespace ProgrammingAreHard\Arbiter\Domain;
 
 use ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface;
-use ProgrammingAreHard\Arbiter\Model\MasksAggregatorInterface;
+use ProgrammingAreHard\Arbiter\Model\MaskAggregatorInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsArbiterInterface;
 use Symfony\Component\Security\Acl\Exception\AclNotFoundException;
 use Symfony\Component\Security\Acl\Exception\NoAceFoundException;
 use Symfony\Component\Security\Acl\Model\MutableAclProviderInterface;
+use Symfony\Component\Security\Acl\Model\ObjectIdentityInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class PermissionsArbiter implements PermissionsArbiterInterface
 {
     /**
-     * Object to grant/check permissions against.
-     *
-     * @var object
+     * @var ObjectIdentityInterface
      */
-    private $object;
+    private $objectIdentity;
 
     /**
      * @var MutableAclProviderInterface
@@ -36,7 +35,7 @@ class PermissionsArbiter implements PermissionsArbiterInterface
     private $identityFactory;
 
     /**
-     * @var MasksAggregator
+     * @var MaskAggregator
      */
     private $masksAggregator;
 
@@ -46,18 +45,18 @@ class PermissionsArbiter implements PermissionsArbiterInterface
      * @param MutableAclProviderInterface $aclProvider
      * @param IndexedAceResolverInterface $aceResolver
      * @param IdentityFactoryInterface $identityFactory
-     * @param MasksAggregatorInterface $maskAggregator
+     * @param MaskAggregatorInterface $maskAggregator
      */
     public function __construct(
         MutableAclProviderInterface $aclProvider,
         IndexedAceResolverInterface $aceResolver = null,
         IdentityFactoryInterface $identityFactory = null,
-        MasksAggregatorInterface $maskAggregator = null
+        MaskAggregatorInterface $maskAggregator = null
     ) {
         $this->aclProvider = $aclProvider;
         $this->aceResolver = $aceResolver ? $aceResolver : new IndexedAceResolver;
         $this->identityFactory = $identityFactory ? $identityFactory : new IdentityFactory;
-        $this->masksAggregator = $maskAggregator ? $maskAggregator : new MasksAggregator;
+        $this->masksAggregator = $maskAggregator ? $maskAggregator : new MaskAggregator;
     }
 
     /**
@@ -65,14 +64,7 @@ class PermissionsArbiter implements PermissionsArbiterInterface
      */
     public function setObject($object)
     {
-        if (!is_object($object)) {
-            throw new \InvalidArgumentException(sprintf(
-                'PermissionsArbiter expected object. %s given',
-                gettype($object)
-            ));
-        }
-
-        $this->object = $object;
+        $this->objectIdentity = $this->identityFactory->getObjectIdentity($object);
 
         return $this;
     }
@@ -92,7 +84,12 @@ class PermissionsArbiter implements PermissionsArbiterInterface
      */
     public function grant(UserInterface $user)
     {
-        $acl = $this->getAcl($this->object);
+        try {
+            $acl = $this->aclProvider->findAcl($this->objectIdentity);
+        } catch (AclNotFoundException $e) {
+            $acl = $this->aclProvider->createAcl($this->objectIdentity);
+        }
+
         $userIdentity = $this->identityFactory->getUserIdentity($user);
 
         try {
@@ -103,13 +100,11 @@ class PermissionsArbiter implements PermissionsArbiterInterface
             $mask = $this->masksAggregator->build($initialMask);
 
             $acl->updateObjectAce($indexedAce->getIndex(), $mask);
-            $this->aclProvider->updateAcl($acl);
-
         } catch (NoAceFoundException $e) {
-
             $acl->insertObjectAce($userIdentity, $this->masksAggregator->build());
-            $this->aclProvider->updateAcl($acl);
         }
+
+        $this->aclProvider->updateAcl($acl);
     }
 
     /**
@@ -117,7 +112,21 @@ class PermissionsArbiter implements PermissionsArbiterInterface
      */
     public function revoke(UserInterface $user)
     {
-        // TODO: Implement revoke() method.
+        try {
+            $acl = $this->aclProvider->findAcl($this->objectIdentity);
+            $userIdentity = $this->identityFactory->getUserIdentity($user);
+            $indexedAce = $this->aceResolver->resolveIndexedAce($acl, $userIdentity);
+
+            $initialMask = $indexedAce->getAce()->getMask();
+            $mask = $this->masksAggregator
+                ->setMode(MaskAggregator::MASK_REMOVE)
+                ->build($initialMask);
+
+            $acl->updateObjectAce($indexedAce->getIndex(), $mask);
+            $this->aclProvider->updateAcl($acl);
+        } catch (AclNotFoundException $e) {
+        } catch (NoAceFoundException $e) {
+        }
     }
 
     /**
@@ -125,25 +134,18 @@ class PermissionsArbiter implements PermissionsArbiterInterface
      */
     public function isGranted(UserInterface $user)
     {
-        // TODO: Implement isGranted() method.
-    }
+        if ($masks = $this->masksAggregator->getAllMasks(new \stdClass)) {
 
-    /**
-     * Get resource's ACL.
-     *
-     * @param object $object
-     * @return \Symfony\Component\Security\Acl\Model\MutableAclInterface
-     */
-    private function getAcl($object)
-    {
-        $objectIdentity = $this->identityFactory->getObjectIdentity($object);
+            try {
+                $acl = $this->aclProvider->findAcl($this->objectIdentity);
+                $userIdentity = $this->identityFactory->getUserIdentity($user);
+                return $acl->isGranted($masks, array($userIdentity));
+            } catch (AclNotFoundException $e) {
+            }
 
-        try {
-            $acl = $this->aclProvider->findAcl($objectIdentity);
-        } catch (AclNotFoundException $e) {
-            $acl = $this->aclProvider->createAcl($objectIdentity);
+            return false;
         }
 
-        return $acl;
+        return true;
     }
 } 

@@ -2,7 +2,7 @@
 
 namespace ProgrammingAreHard\Arbiter\Model;
 
-interface MasksAggregatorInterface
+interface MaskAggregatorInterface
 {
     const MASK_ADD = 1;
     const MASK_REMOVE = 0;

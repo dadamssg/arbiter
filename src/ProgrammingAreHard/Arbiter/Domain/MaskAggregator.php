@@ -2,12 +2,12 @@
 
 namespace ProgrammingAreHard\Arbiter\Domain;
 
-use ProgrammingAreHard\Arbiter\Model\MasksAggregatorInterface;
+use ProgrammingAreHard\Arbiter\Model\MaskAggregatorInterface;
 use Symfony\Component\Security\Acl\Permission\BasicPermissionMap;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use Symfony\Component\Security\Acl\Permission\PermissionMapInterface;
 
-class MasksAggregator implements MasksAggregatorInterface
+class MaskAggregator implements MaskAggregatorInterface
 {
     /**
      * Permissions.

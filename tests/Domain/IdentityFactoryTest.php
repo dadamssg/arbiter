@@ -5,6 +5,7 @@ namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 use ProgrammingAreHard\Arbiter\Domain\IdentityFactory;
 use Symfony\Component\Security\Acl\Model\ObjectIdentityInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
+use Symfony\Component\Security\Core\User\User;
 
 class IdentityFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,44 +19,41 @@ class IdentityFactoryTest extends \PHPUnit_Framework_TestCase
         $this->factory = new IdentityFactory;
     }
 
-    public function testCanMakeObjectIdentity()
+    /**
+     * @test
+     */
+    public function it_can_make_object_identity()
     {
-        $object = new Entity(7);
+        $object = $this->newObject(7);
 
         $identity = $this->factory->getObjectIdentity($object);
 
         $this->assertTrue($identity instanceof ObjectIdentityInterface);
         $this->assertEquals(7, $identity->getIdentifier());
-        $this->assertEquals('ProgrammingAreHard\Arbiter\Tests\Domain\Entity', $identity->getType());
+        $this->assertEquals(get_class($object), $identity->getType());
     }
 
-    public function testCanMakeUserIdentity()
+    /**
+     * @test
+     */
+    public function it_can_make_user_identity()
     {
-        $user = $this->getMock('Symfony\Component\Security\Core\User\UserInterface');
-        $user
-            ->expects($this->any())
-            ->method('getUsername')
-            ->willReturn('foobar');
+        $user = new User('foo', 'bar');
 
         $identity = $this->factory->getUserIdentity($user);
+
         $this->assertTrue($identity instanceof SecurityIdentityInterface);
-        $this->assertSame('foobar', $identity->getUsername());
+        $this->assertSame('foo', $identity->getUsername());
         $this->assertSame(get_class($user), $identity->getClass());
-
-    }
-}
-
-class Entity
-{
-    private $id;
-
-    public function __construct($id)
-    {
-        $this->id = $id;
     }
 
-    public function getId()
+    private function newObject($id)
     {
-        return $this->id;
+        $object = $this->getMock('Symfony\Component\Security\Acl\Model\EntryInterface');
+        $object
+            ->expects($this->once())
+            ->method('getId')
+            ->willReturn($id);
+        return $object;
     }
 }

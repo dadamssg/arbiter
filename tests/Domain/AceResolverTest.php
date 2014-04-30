@@ -4,6 +4,7 @@ namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 
 use ProgrammingAreHard\Arbiter\Domain\IndexedAceResolver;
 use Symfony\Component\Security\Acl\Model\EntryInterface;
+use Symfony\Component\Security\Acl\Model\MutableAclInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 
 class AceResolverTest extends \PHPUnit_Framework_TestCase
@@ -13,122 +14,100 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
      */
     private $aceResolver;
 
+    /**
+     * @var MutableAclInterface
+     */
+    private $acl;
+
+    /**
+     * @var SecurityIdentityInterface
+     */
+    private $userIdentity;
+
     public function setUp()
     {
         $this->aceResolver = new IndexedAceResolver;
+        $this->acl = $this->getMock('Symfony\Component\Security\Acl\Model\MutableAclInterface');
+        $this->userIdentity = $this->getMock('Symfony\Component\Security\Acl\Model\SecurityIdentityInterface');
+
     }
 
     /**
+     * @test
+     *
      * @expectedException \Symfony\Component\Security\Acl\Exception\NoAceFoundException
      */
-    public function testNoAcesThrowsException()
+    public function it_throws_exception_when_no_aces()
     {
-        $acl = $this->newAcl();
+        $this->expectAclGetObjectAcesReturns(array());
 
-        $acl
-            ->expects($this->any())
-            ->method('getObjectAces')
-            ->willReturn(array());
-
-        $sid = $this->newSid();
-
-        $this->aceResolver->resolveIndexedAce($acl, $sid);
+        $this->aceResolver->resolveIndexedAce($this->acl, $this->userIdentity);
     }
 
     /**
+     * @test
+     *
      * @expectedException \Symfony\Component\Security\Acl\Exception\NoAceFoundException
      */
-    public function testNonMatchingAcesThrowsException()
+    public function it_throws_exception_when_no_matching_aces()
     {
-        $acl = $this->newAcl();
+        $aces = $this->getAcesWithNoneMatching();
+        $this->expectAclGetObjectAcesReturns($aces);
 
-        $acl
-            ->expects($this->any())
-            ->method('getObjectAces')
-            ->willReturn($this->getAcesWithNoneMatching());
-
-        $sid = $this->newSid();
-
-        $this->aceResolver->resolveIndexedAce($acl, $sid);
+        $this->aceResolver->resolveIndexedAce($this->acl, $this->userIdentity);
     }
 
-    public function testIndexGetsSetWhenAceIsResolved()
+    /**
+     * @test
+     */
+    public function it_sets_index_and_ace_when_ace_is_resovled()
     {
-        $acl = $this->newAcl();
+        $aces = $this->getAcesWithOneMatching();
+        $this->expectAclGetObjectAcesReturns($aces);
 
-        $sid = $this->newSid();
-
-        $aces = $this->getAcesWithOneMatching($sid);
-
-        $acl
-            ->expects($this->any())
-            ->method('getObjectAces')
-            ->willReturn($aces);
-
-        $indexedAce = $this->aceResolver->resolveIndexedAce($acl, $sid);
+        $indexedAce = $this->aceResolver->resolveIndexedAce($this->acl, $this->userIdentity);
         $this->assertTrue($indexedAce->getAce() instanceof EntryInterface);
         $this->assertSame(0, $indexedAce->getIndex());
     }
 
-    private function getAcesWithOneMatching(SecurityIdentityInterface $sid)
+    private function expectAclGetObjectAcesReturns(array $aces = array())
     {
-        $sid
-            ->expects($this->once())
+        $this->acl
+            ->expects($this->any())
+            ->method('getObjectAces')
+            ->willReturn($aces);
+    }
+
+    private function expectUserIdentityToMatch($matches = true)
+    {
+        $this->userIdentity
+            ->expects($this->any())
             ->method('equals')
-            ->with($sid)
-            ->willReturn(true);
+            ->with($this->userIdentity)
+            ->willReturn($matches);
+    }
 
-        $ace = $this->newAce();
-        $ace
-            ->expects($this->once())
-            ->method('getSecurityIdentity')
-            ->willReturn($sid);
+    private function getAcesWithOneMatching()
+    {
+        $this->expectUserIdentityToMatch(true);
 
-        return array(
-            $ace,
-            $this->newAce()
-        );
+        return array($this->newAce(), $this->newAce());
     }
 
     private function getAcesWithNoneMatching()
     {
-        $sid = $this->newSid();
-        $sid
-            ->expects($this->any())
-            ->method('equals')
-            ->with($sid)
-            ->willReturn(false);
+        $this->expectUserIdentityToMatch(false);
 
-        $ace1 = $this->newAce();
-        $ace1
-            ->expects($this->once())
-            ->method('getSecurityIdentity')
-            ->willReturn($sid);
-
-        $ace2 = $this->newAce();
-        $ace2
-            ->expects($this->once())
-            ->method('getSecurityIdentity')
-            ->willReturn($sid);
-
-        return array(
-            $ace1,
-            $ace2
-        );
+        return array($this->newAce(), $this->newAce());
     }
 
     private function newAce()
     {
-        return $this->getMock('Symfony\Component\Security\Acl\Model\EntryInterface');
-    }
-
-    private function newAcl()
-    {
-        return $this->getMock('Symfony\Component\Security\Acl\Model\AclInterface');
-    }
-
-    private function newSid()
-    {
-        return $this->getMock('Symfony\Component\Security\Acl\Model\SecurityIdentityInterface');
+        $ace = $this->getMock('Symfony\Component\Security\Acl\Model\EntryInterface');
+        $ace
+            ->expects($this->any())
+            ->method('getSecurityIdentity')
+            ->willReturn($this->userIdentity);
+        return $ace;
     }
 } 
