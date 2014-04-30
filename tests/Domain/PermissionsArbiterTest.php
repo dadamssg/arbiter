@@ -76,6 +76,9 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
      */
     private $user;
 
+    /**
+     * Setup.
+     */
     public function setUp()
     {
         $this->arbiter = new PermissionsArbiter(

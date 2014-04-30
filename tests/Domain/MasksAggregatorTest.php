@@ -23,6 +23,9 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
      */
     private $permissionMap;
 
+    /**
+     * Setup.
+     */
     public function setUp()
     {
         $this->aggregator = new MaskAggregator(
