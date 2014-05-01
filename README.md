@@ -31,12 +31,14 @@ $arbiter
     ->setPermissions('master')
     ->grant($user);
 
-// grant multiple permissions
+// or grant multiple permissions
 $arbiter
     ->setObject($document)
     ->setPermissions(['view', 'edit'])
     ->grant($user);
 ```
+
+> **Note:** Granting always adds to existing permissions if there are any. It never takes any away.
 
 ## Revoking permissions
 
