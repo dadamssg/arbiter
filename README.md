@@ -43,20 +43,35 @@ $arbiter
 ## Revoking permissions
 
 ```php
+// revoke single permission
 $arbiter
     ->setObject($task)
     ->setPermissions('edit')
+    ->revoke($user);
+
+// or revoke multiple permissions
+$arbiter
+    ->setObject($task)
+    ->setPermissions(['view', 'edit'])
     ->revoke($user);
 ```
 
 ## Checking permissions
 
 ```php
+// check single permission
 $arbiter
     ->setObject($project)
     ->setPermissions('edit');
-    
-$isGranted = $arbiter->isGranted($user); // true or false
+
+$canEdit = $arbiter->isGranted($user); // bool
+
+// check multiple permissions
+$arbiter
+    ->setObject($project)
+    ->setPermissions(['view', 'edit']);
+
+$canViewAndEdit = $arbiter->isGranted($user); // bool
 ```
 
 ## Register Arbiter in Symfony's container
