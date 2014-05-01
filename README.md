@@ -10,11 +10,7 @@ Arbiter makes granting users different permissions for specific objects easy. It
 
 You don't need to worry about: ACL's, ACE's, object identities, security identies, mask builders, etc. 
 
----
-
 > Arbiter assumes ACL's have been [set up](http://symfony.com/doc/current/cookbook/security/acl.html).
-
----
 
 ## Granting permisssions
 
@@ -31,37 +27,37 @@ $user = $this->get('security.context')->getToken()->getUser();
 // get an entity with an id
 $document = $this->get('document.repository')->getDocument(1);
 
+// grant single permission
 $arbiter
     ->setObject($document)
-    ->setPermissions(MaskBuilder::MASK_OWNER)
-//  ->setPermissions([MaskBuilder::MASK_VIEW, MaskBuilder::MASK_EDIT]) or multiple permissions
+    ->setPermissions('master')
+    ->grant($user);
+
+// grant multiple permissions
+$arbiter
+    ->setObject($document)
+    ->setPermissions(['view', 'edit'])
     ->grant($user);
 ```
-
----
 
 ## Revoking permissions
 
 ```php
 $arbiter
     ->setObject($task)
-    ->setPermissions(MaskBuilder::MASK_EDIT)
+    ->setPermissions('edit')
     ->revoke($user);
 ```
-
----
 
 ## Checking permissions
 
 ```php
 $arbiter
     ->setObject($project)
-    ->setPermissions(MaskBuilder::MASK_EDIT);
+    ->setPermissions('edit');
     
 $isGranted = $arbiter->isGranted($user); // true or false
 ```
-
----
 
 ## Register Arbiter in Symfony's container
 
@@ -73,4 +69,5 @@ services:
         class: ProgrammingAreHard\ResourceBundle\Security\AclPermissionsArbiter
         arguments:[@security.acl.provider]
 ```
-    
+
+> **Note:** Arbiter uses the MaskBuilder internally. This means, out of the box, it is limited to the [MaskBuilder's permissions](https://github.com/symfony/Security/blob/master/Acl/Permission/MaskBuilder.php#L20).
