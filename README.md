@@ -10,8 +10,6 @@ Arbiter makes granting users different permissions for specific objects easy. It
 
 You don't need to worry about: ACL's, ACE's, object identities, security identies, mask builders, etc. 
 
-> Arbiter assumes ACL's have been [set up](http://symfony.com/doc/current/cookbook/security/acl.html).
-
 ## Granting permisssions
 
 ```php
