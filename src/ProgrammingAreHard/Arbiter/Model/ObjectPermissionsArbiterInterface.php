@@ -4,7 +4,7 @@ namespace ProgrammingAreHard\Arbiter\Model;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-interface PermissionsArbiterInterface
+interface ObjectPermissionsArbiterInterface
 {
     /**
      * Set the resource.

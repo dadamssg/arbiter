@@ -13,7 +13,7 @@ You don't need to worry about: ACL's, ACE's, object identities, security identie
 ## Granting permisssions
 
 ```php
-use ProgrammingAreHard\Arbiter\Domain\PermissionsArbiter as Arbiter;
+use ProgrammingAreHard\Arbiter\Domain\ObjectPermissionsArbiter as Arbiter;
 
 // get the acl provider from the container
 $aclProvider = $this->get('security.acl.provider');

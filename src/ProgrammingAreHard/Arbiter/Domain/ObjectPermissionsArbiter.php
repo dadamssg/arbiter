@@ -5,7 +5,7 @@ namespace ProgrammingAreHard\Arbiter\Domain;
 use ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface;
 use ProgrammingAreHard\Arbiter\Model\MaskAggregatorInterface;
-use ProgrammingAreHard\Arbiter\Model\PermissionsArbiterInterface;
+use ProgrammingAreHard\Arbiter\Model\ObjectPermissionsArbiterInterface;
 use Symfony\Component\Security\Acl\Exception\AclNotFoundException;
 use Symfony\Component\Security\Acl\Exception\NoAceFoundException;
 use Symfony\Component\Security\Acl\Model\MutableAclInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Security\Acl\Model\MutableAclProviderInterface;
 use Symfony\Component\Security\Acl\Model\ObjectIdentityInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class PermissionsArbiter implements PermissionsArbiterInterface
+class ObjectPermissionsArbiter implements ObjectPermissionsArbiterInterface
 {
     /**
      * @var object

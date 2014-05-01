@@ -4,7 +4,7 @@ namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 
 use ProgrammingAreHard\Arbiter\Domain\IndexedAce;
 use ProgrammingAreHard\Arbiter\Domain\MaskAggregator;
-use ProgrammingAreHard\Arbiter\Domain\PermissionsArbiter;
+use ProgrammingAreHard\Arbiter\Domain\ObjectPermissionsArbiter;
 use ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface;
 use Symfony\Component\Security\Acl\Exception\AclNotFoundException;
@@ -17,12 +17,12 @@ use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
+class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 {
     const MASK = 128;
 
     /**
-     * @var PermissionsArbiter
+     * @var ObjectPermissionsArbiter
      */
     private $arbiter;
 
@@ -81,7 +81,7 @@ class PermissionsArbiterTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->arbiter = new PermissionsArbiter(
+        $this->arbiter = new ObjectPermissionsArbiter(
             $this->aclProvider = $this->getMock('Symfony\Component\Security\Acl\Model\MutableAclProviderInterface'),
             $this->aceResolver = $this->getMock('ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface'),
             $this->identityFactory = $this->getMock('ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface'),
