@@ -32,7 +32,6 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
         $this->aceResolver = new IndexedAceResolver;
         $this->acl = $this->getMock('Symfony\Component\Security\Acl\Model\MutableAclInterface');
         $this->userIdentity = $this->getMock('Symfony\Component\Security\Acl\Model\SecurityIdentityInterface');
-
     }
 
     /**
@@ -42,7 +41,7 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_exception_when_no_aces()
     {
-        $this->expectAclGetObjectAcesReturns(array());
+        $this->getObjectAcesWillReturn(array());
 
         $this->aceResolver->resolveIndexedAce($this->acl, $this->userIdentity);
     }
@@ -55,7 +54,7 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
     public function it_throws_exception_when_no_matching_aces()
     {
         $aces = $this->getAcesWithNoneMatching();
-        $this->expectAclGetObjectAcesReturns($aces);
+        $this->getObjectAcesWillReturn($aces);
 
         $this->aceResolver->resolveIndexedAce($this->acl, $this->userIdentity);
     }
@@ -66,14 +65,14 @@ class AceResolverTest extends \PHPUnit_Framework_TestCase
     public function it_sets_index_and_ace_when_ace_is_resovled()
     {
         $aces = $this->getAcesWithOneMatching();
-        $this->expectAclGetObjectAcesReturns($aces);
+        $this->getObjectAcesWillReturn($aces);
 
         $indexedAce = $this->aceResolver->resolveIndexedAce($this->acl, $this->userIdentity);
         $this->assertTrue($indexedAce->getAce() instanceof EntryInterface);
         $this->assertSame(0, $indexedAce->getIndex());
     }
 
-    private function expectAclGetObjectAcesReturns(array $aces = array())
+    private function getObjectAcesWillReturn(array $aces = array())
     {
         $this->acl
             ->expects($this->any())

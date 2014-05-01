@@ -45,8 +45,8 @@ class MaskAggregator implements MaskAggregatorInterface
      */
     public function __construct(MaskBuilder $maskBuilder = null, PermissionMapInterface $permissionMap = null)
     {
-        $this->maskBuilder = $maskBuilder ? $maskBuilder : new MaskBuilder;
-        $this->permissionMap = $permissionMap ? $permissionMap : new BasicPermissionMap;
+        $this->maskBuilder = $maskBuilder ? : new MaskBuilder;
+        $this->permissionMap = $permissionMap ? : new BasicPermissionMap;
     }
 
     /**

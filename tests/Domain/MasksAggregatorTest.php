@@ -39,7 +39,7 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
      */
     public function single_permission_can_be_set()
     {
-        $this->permissionMapContainsPermission(true);
+        $this->permissionMapWillContainPermissions(true);
 
         $result = $this->aggregator->setPermissions('VIEW');
         $this->assertSame($this->aggregator, $result);
@@ -50,7 +50,7 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
      */
     public function multiple_permissions_can_be_set()
     {
-        $this->permissionMapContainsPermission(true);
+        $this->permissionMapWillContainPermissions(true);
 
         $result = $this->aggregator->setPermissions(array('VIEW', 'EDIT'));
         $this->assertSame($this->aggregator, $result);
@@ -63,7 +63,7 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
      */
     public function it_throws_exception_when_invalid_permission()
     {
-        $this->permissionMapContainsPermission(false);
+        $this->permissionMapWillContainPermissions(false);
 
         $this->aggregator->setPermissions(array('foo', 'bar'));
     }
@@ -95,21 +95,18 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
      */
     public function it_adds_masks_when_mode_is_set_to_add()
     {
-        $this->permissionMapContainsPermission(true);
-
-        $this->aggregator->setPermissions(array('VIEW', 'EDIT'));
-
+        $builtMask = 999;
+        $this->permissionMapWillContainPermissions(true);
         $this->expectMaskBuilderReset();
-
         $this->expectMaskBuilderAdd(1, 0);
         $this->expectMaskBuilderAdd(2, 'VIEW');
         $this->expectMaskBuilderAdd(3, 'EDIT');
+        $this->expectMaskBuilderGet($builtMask);
 
-        $this->maskBuilderWillGet(999);
-
+        $this->aggregator->setPermissions(array('VIEW', 'EDIT'));
         $result = $this->aggregator->build();
 
-        $this->assertSame(999, $result);
+        $this->assertSame($builtMask, $result);
     }
 
     /**
@@ -117,24 +114,19 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
      */
     public function it_removes_masks_when_mode_is_set_to_remove()
     {
-        $this->permissionMapContainsPermission(true);
+        $builtMask = 999;
+        $this->permissionMapWillContainPermissions(true);
+        $this->expectMaskBuilderReset();
+        $this->expectMaskBuilderAdd(1, $initialMask = 128);
+        $this->expectMaskBuilderRemove(2, 'VIEW');
+        $this->expectMaskBuilderRemove(3, 'EDIT');
+        $this->expectMaskBuilderGet($builtMask);
 
         $this->aggregator->setPermissions(array('VIEW', 'EDIT'));
         $this->aggregator->setMode(MaskAggregator::MASK_REMOVE);
-
-        $this->expectMaskBuilderReset();
-
-        $initialMask = 128;
-
-        $this->expectMaskBuilderAdd(1, $initialMask);
-        $this->expectMaskBuilderRemove(2, 'VIEW');
-        $this->expectMaskBuilderRemove(3, 'EDIT');
-
-        $this->maskBuilderWillGet(999);
-
         $result = $this->aggregator->build($initialMask);
 
-        $this->assertSame(999, $result);
+        $this->assertSame($builtMask, $result);
     }
 
     /**
@@ -142,12 +134,10 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
      */
     public function get_masks_returns_a_unique_array_of_masks()
     {
-        $this->permissionMapContainsPermission(true);
-
+        $this->permissionMapWillContainPermissions(true);
         $this->aggregator->setPermissions(array('VIEW', 'EDIT'));
 
         $object = new \stdClass;
-
         $this->expectGetMasks(0, 'VIEW', $object, array(1, 2));
         $this->expectGetMasks(1, 'EDIT', $object, array(2, 3));
 
@@ -173,7 +163,7 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
             ->willReturn($masks);
     }
 
-    private function permissionMapContainsPermission($contains = true)
+    private function permissionMapWillContainPermissions($contains = true)
     {
         $this->permissionMap
             ->expects($this->any())
@@ -205,7 +195,7 @@ class MasksAggregatorTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo($permission));
     }
 
-    private function maskBuilderWillGet($mask)
+    private function expectMaskBuilderGet($mask)
     {
         $this->maskBuilder
             ->expects($this->once())

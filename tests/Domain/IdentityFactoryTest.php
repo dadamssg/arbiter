@@ -27,8 +27,7 @@ class IdentityFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function it_can_make_object_identity()
     {
-        $object = $this->newObject(7);
-
+        $object = $this->newEntityObject(7);
         $identity = $this->factory->getObjectIdentity($object);
 
         $this->assertTrue($identity instanceof ObjectIdentityInterface);
@@ -42,7 +41,6 @@ class IdentityFactoryTest extends \PHPUnit_Framework_TestCase
     public function it_can_make_user_identity()
     {
         $user = new User('foo', 'bar');
-
         $identity = $this->factory->getUserIdentity($user);
 
         $this->assertTrue($identity instanceof SecurityIdentityInterface);
@@ -50,7 +48,7 @@ class IdentityFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(get_class($user), $identity->getClass());
     }
 
-    private function newObject($id)
+    private function newEntityObject($id)
     {
         $object = $this->getMock('Symfony\Component\Security\Acl\Model\EntryInterface');
         $object
