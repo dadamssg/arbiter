@@ -25,7 +25,7 @@ $arbiter = new Arbiter($aclProvider);
 $user = $this->get('security.context')->getToken()->getUser();
 
 // get an entity with an id
-$document = $this->get('document.repository')->getDocument(1);
+$document = $this->get('document.repository')->find(1);
 
 // grant single permission
 $arbiter
