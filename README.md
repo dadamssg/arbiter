@@ -6,7 +6,7 @@
 
 ## Documentation
 
-Arbiter makes granting users different permissions on resources easy. It does this by hiding the complexity of working with Symfony's security component to manipulate ACL's. 
+Arbiter makes granting users different permissions for specific objects easy. It does this by hiding the complexity of working with Symfony's security component to manipulate ACL's.
 
 You don't need to worry about: ACL's, ACE's, object identities, security identies, mask builders, etc. 
 
