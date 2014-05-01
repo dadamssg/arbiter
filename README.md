@@ -83,7 +83,7 @@ $canViewAndEdit = $arbiter->isGranted($user); // bool
 
 services:
     permissions.arbiter:
-        class: ProgrammingAreHard\ResourceBundle\Security\AclPermissionsArbiter
+        class: ProgrammingAreHard\Arbiter\Domain\ObjectPermissionsArbiter
         arguments:[@security.acl.provider]
 ```
 
