@@ -146,6 +146,8 @@ class PermissionsArbiter implements PermissionsArbiterInterface
     {
         $this->ensureObjectPresence();
 
+        $this->maskAggregator->setMode(MaskAggregator::MASK_ADD);
+
         if ($masks = $this->maskAggregator->getAllMasks($this->object)) {
 
             try {
