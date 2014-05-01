@@ -1,5 +1,5 @@
 {
-    "name": "programmingarehard/Arbiter",
+    "name": "programmingarehard/arbiter",
     "license": "MIT",
     "type": "library",
     "description": "Convenience library to manipulate Symfony ACL's",
@@ -22,7 +22,7 @@
     	"phpunit/phpunit": "~4.0"
     },
     "minimum-stability": "dev",
-    "target-dir": "programmingarehard/Arbiter",
+    "target-dir": "programmingarehard/arbiter",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
