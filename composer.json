@@ -10,8 +10,9 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "ProgrammingAreHard\\Arbiter": "src/"
+        "psr-4": {
+            "ProgrammingAreHard\\Arbiter\\": "src",
+            "ProgrammingAreHard\\Arbiter\\Tests\\": "tests"
         }
     },
     "require": {
