@@ -2,12 +2,12 @@
 
 namespace ProgrammingAreHard\Arbiter\Domain;
 
-use ProgrammingAreHard\Arbiter\Model\MaskAggregatorInterface;
+use ProgrammingAreHard\Arbiter\Model\PermissionsMaskAggregatorInterface;
+use ProgrammingAreHard\Arbiter\Model\PermissionMapInterface;
 use Symfony\Component\Security\Acl\Permission\BasicPermissionMap;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
-use Symfony\Component\Security\Acl\Permission\PermissionMapInterface;
 
-class MaskAggregator implements MaskAggregatorInterface
+class PermissionsMaskAggregator implements PermissionsMaskAggregatorInterface
 {
     /**
      * Permissions.
@@ -90,15 +90,21 @@ class MaskAggregator implements MaskAggregatorInterface
     public function build($initialMask = 0)
     {
         $this->maskBuilder->reset();
-        $this->maskBuilder->add($initialMask);
 
-        foreach ($this->permissions as $permission) {
+        $existingPermissions = $this->permissionMap->maskToPermissions($initialMask);
 
-            if (self::MASK_ADD === $this->mode) {
-                $this->maskBuilder->add($permission);
-            } else {
-                $this->maskBuilder->remove($permission);
-            }
+        if (self::MASK_ADD == $this->mode) {
+            $permissions = array_merge($existingPermissions, $this->permissions);
+        } else {
+            $permissions = array_diff($existingPermissions, $this->permissions);
+        }
+
+        $masks = $this->permissionMap->permissionsToMasks($permissions);
+
+        $masks = array_unique($masks);
+
+        foreach ($masks as $mask) {
+            $this->maskBuilder->add($mask);
         }
 
         return $this->maskBuilder->get();
@@ -107,19 +113,8 @@ class MaskAggregator implements MaskAggregatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getAllMasks($object)
+    public function getMasks($object)
     {
-        $allMasks = array();
-
-        foreach ($this->permissions as $permission) {
-
-            $masks = $this->permissionMap->getMasks($permission, $object);
-
-            if (is_array($masks)) {
-                $allMasks = array_merge($allMasks, $masks);
-            }
-        }
-
-        return array_unique($allMasks);
+        return $this->permissionMap->permissionsToMasks($this->permissions);
     }
-} 
+}

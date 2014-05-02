@@ -3,7 +3,7 @@
 namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 
 use ProgrammingAreHard\Arbiter\Domain\IndexedAce;
-use ProgrammingAreHard\Arbiter\Domain\MaskAggregator;
+use ProgrammingAreHard\Arbiter\Domain\PermissionsMaskAggregator;
 use ProgrammingAreHard\Arbiter\Domain\ObjectPermissionsArbiter;
 use ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface;
@@ -42,7 +42,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
     private $identityFactory;
 
     /**
-     * @var MaskAggregator
+     * @var PermissionsMaskAggregator
      */
     private $maskAggregator;
 
@@ -85,7 +85,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
             $this->aclProvider = $this->getMock('Symfony\Component\Security\Acl\Model\MutableAclProviderInterface'),
             $this->aceResolver = $this->getMock('ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface'),
             $this->identityFactory = $this->getMock('ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface'),
-            $this->maskAggregator = $this->getMock('ProgrammingAreHard\Arbiter\Model\MaskAggregatorInterface')
+            $this->maskAggregator = $this->getMock('ProgrammingAreHard\Arbiter\Model\PermissionsMaskAggregatorInterface')
         );
 
         $this->objectIdentity = $this->getMock('Symfony\Component\Security\Acl\Model\ObjectIdentityInterface');
@@ -175,7 +175,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
         $this->aclWillBeFound();
         $this->expectUserIdentityToBeCreated($this->user);
         $this->aceWillBeFound($indexedAce = new IndexedAce(1, $this->ace));
-        $this->expectMaskToBeBuiltWithAceAndReturn(MaskAggregator::MASK_ADD, 0);
+        $this->expectMaskToBeBuiltWithAceAndReturn(PermissionsMaskAggregator::MASK_ADD, 0);
         $this->expectAceToBeDeleted($indexedAce);
         $this->expectAclToBeUpdated();
 
@@ -232,7 +232,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
         $this->expectUserIdentityToBeCreated($this->user);
         $this->aclWillBeFound();
         $this->aceWillBeFound($indexedAce = new IndexedAce(1, $this->ace));
-        $this->expectMaskToBeBuiltWithAceAndReturn(MaskAggregator::MASK_REMOVE);
+        $this->expectMaskToBeBuiltWithAceAndReturn(PermissionsMaskAggregator::MASK_REMOVE);
         $this->expectAclToBeUpdated();
 
         $this->arbiter
@@ -249,7 +249,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
         $this->aclWillBeFound();
         $this->expectUserIdentityToBeCreated($this->user);
         $this->aceWillBeFound($indexedAce = new IndexedAce(1, $this->ace));
-        $this->expectMaskToBeBuiltWithAceAndReturn(MaskAggregator::MASK_REMOVE, 0);
+        $this->expectMaskToBeBuiltWithAceAndReturn(PermissionsMaskAggregator::MASK_REMOVE, 0);
         $this->expectAceToBeDeleted($indexedAce);
         $this->expectAclToBeUpdated();
 
@@ -274,7 +274,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
     public function is_granted_with_no_permissions_returns_true()
     {
         $this->expectObjectIdentityToBeCreated($this->object);
-        $this->getAllMasksFromAggregatorWillReturn(array());
+        $this->getMasksFromAggregatorWillReturn(array());
 
         $granted = $this->arbiter
             ->setObject($this->object)
@@ -289,7 +289,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
     public function is_granted_with_no_acl_returns_false()
     {
         $this->expectObjectIdentityToBeCreated($this->object);
-        $this->getAllMasksFromAggregatorWillReturn(array('VIEW', 'EDIT'));
+        $this->getMasksFromAggregatorWillReturn(array('VIEW', 'EDIT'));
         $this->aclWillNotBeFound();
 
         $granted = $this->arbiter
@@ -307,7 +307,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
         $permissions = array('VIEW', 'EDIT');
 
         $this->expectObjectIdentityToBeCreated($this->object);
-        $this->getAllMasksFromAggregatorWillReturn($permissions);
+        $this->getMasksFromAggregatorWillReturn($permissions);
         $this->aclWillBeFound();
         $this->expectUserIdentityToBeCreated($this->user);
         $this->expectAclGrantCheck($permissions, true);
@@ -328,11 +328,11 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
             ->willReturn($granted);
     }
 
-    private function getAllMasksFromAggregatorWillReturn($permissions)
+    private function getMasksFromAggregatorWillReturn($permissions)
     {
         $this->maskAggregator
             ->expects($this->once())
-            ->method('getAllMasks')
+            ->method('getMasks')
             ->with($this->object)
             ->willReturn($permissions);
     }
@@ -346,7 +346,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
             ->willReturn($indexedAce);
     }
 
-    private function expectMaskToBeBuiltWithAceAndReturn($mode = MaskAggregator::MASK_ADD, $returnMask = self::MASK)
+    private function expectMaskToBeBuiltWithAceAndReturn($mode = PermissionsMaskAggregator::MASK_ADD, $returnMask = self::MASK)
     {
         $this->expectMaskAggreatorModeSet($mode);
 
@@ -364,7 +364,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 
     private function expectMaskToBeBuiltWithoutAceAndReturn($returnMask = self::MASK)
     {
-        $this->expectMaskAggreatorModeSet(MaskAggregator::MASK_ADD);
+        $this->expectMaskAggreatorModeSet(PermissionsMaskAggregator::MASK_ADD);
 
         $this->maskAggregator
             ->expects($this->once())

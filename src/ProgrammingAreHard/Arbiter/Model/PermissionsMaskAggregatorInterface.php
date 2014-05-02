@@ -2,7 +2,7 @@
 
 namespace ProgrammingAreHard\Arbiter\Model;
 
-interface MaskAggregatorInterface
+interface PermissionsMaskAggregatorInterface
 {
     const MASK_ADD = 1;
     const MASK_REMOVE = 0;
@@ -39,5 +39,5 @@ interface MaskAggregatorInterface
      * @param object $object
      * @return int[]
      */
-    public function getAllMasks($object);
+    public function getMasks($object);
 } 
