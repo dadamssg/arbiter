@@ -21,7 +21,7 @@ class PermissionMap implements PermissionMapInterface
         BasicPermissionMap::PERMISSION_UNDELETE => MaskBuilder::MASK_UNDELETE,
         BasicPermissionMap::PERMISSION_OPERATOR => MaskBuilder::MASK_OPERATOR,
         BasicPermissionMap::PERMISSION_MASTER => MaskBuilder::MASK_MASTER,
-        BasicPermissionMap::PERMISSION_OWNER => MaskBuilder::CODE_OWNER
+        BasicPermissionMap::PERMISSION_OWNER => MaskBuilder::MASK_OWNER
     );
 
     /**

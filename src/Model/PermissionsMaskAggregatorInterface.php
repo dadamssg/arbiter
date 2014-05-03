@@ -17,6 +17,22 @@ interface PermissionsMaskAggregatorInterface
     public function setPermissions($permissions);
 
     /**
+     * Add permissions.
+     *
+     * @param string[] $permissions
+     * @return $this
+     */
+    public function addPermissions($permissions);
+
+    /**
+     * Remove permissions.
+     *
+     * @param string[] $permssions
+     * @return $this
+     */
+    public function removePermissions($permssions);
+
+    /**
      * Set the aggregation mode.
      *
      * @param int $mode

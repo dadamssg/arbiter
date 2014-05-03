@@ -4,7 +4,7 @@ namespace ProgrammingAreHard\Arbiter\Domain;
 
 use ProgrammingAreHard\Arbiter\Model\PermissionsMaskAggregatorInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionMapInterface;
-use Symfony\Component\Security\Acl\Permission\BasicPermissionMap;
+use string;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 class PermissionsMaskAggregator implements PermissionsMaskAggregatorInterface
@@ -46,7 +46,7 @@ class PermissionsMaskAggregator implements PermissionsMaskAggregatorInterface
     public function __construct(MaskBuilder $maskBuilder = null, PermissionMapInterface $permissionMap = null)
     {
         $this->maskBuilder = $maskBuilder ? : new MaskBuilder;
-        $this->permissionMap = $permissionMap ? : new BasicPermissionMap;
+        $this->permissionMap = $permissionMap ? : new PermissionMap;
     }
 
     /**
@@ -54,17 +54,56 @@ class PermissionsMaskAggregator implements PermissionsMaskAggregatorInterface
      */
     public function setPermissions($permissions)
     {
-        $permissions = is_array($permissions) ? $permissions : (array)$permissions;
+        $this->permissions = [];
 
-        foreach ($permissions as $permission) {
-            if (!$this->permissionMap->contains($permission)) {
-                throw new \InvalidArgumentException(sprintf('Unsupported permission: %s', $permission));
-            }
-        }
+        $permissions = $this->makeArray($permissions);
 
-        $this->permissions = $permissions;
+        $this->addPermissions($permissions);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPermissions($permissions)
+    {
+        $permissions = $this->makeArray($permissions);
+
+        foreach ($permissions as $permission) {
+            $this->addPermission($permission);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add a single permission.
+     *
+     * @param string $permission
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    protected function addPermission($permission)
+    {
+        if (!$this->permissionMap->contains($permission)) {
+            throw new \InvalidArgumentException(sprintf('Unsupported permission: %s', $permission));
+        }
+
+        $this->permissions[] = $permission;
+
+        return $this;
+    }
+
+    /**
+     * Remove permissions.
+     *
+     * @param string[] $permssions
+     * @return $this
+     */
+    public function removePermissions($permssions)
+    {
+        // TODO: Implement removePermissions() method.
     }
 
     /**
@@ -116,5 +155,16 @@ class PermissionsMaskAggregator implements PermissionsMaskAggregatorInterface
     public function getMasks($object)
     {
         return $this->permissionMap->permissionsToMasks($this->permissions);
+    }
+
+    /**
+     * Make the permissions an array if not already.
+     *
+     * @param string|string[] $permissions
+     * @return array
+     */
+    private function makeArray($permissions)
+    {
+        return is_array($permissions) ? $permissions : (array)$permissions;
     }
 }
