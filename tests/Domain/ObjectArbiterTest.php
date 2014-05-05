@@ -324,7 +324,7 @@ class ObjectArbiterTest extends \PHPUnit_Framework_TestCase
     private function expectPermissionsAreTransformedToMask($mask = 0)
     {
         $this->transformer
-            ->shouldReceive('toMask')
+            ->shouldReceive('permissionsToMask')
             ->with($this->permissions)
             ->andReturn($mask);
     }
@@ -332,7 +332,7 @@ class ObjectArbiterTest extends \PHPUnit_Framework_TestCase
     private function expectMaskIsTransformedToPermissions($mask = 0)
     {
         $this->transformer
-            ->shouldReceive('toPermissions')
+            ->shouldReceive('maskToPermissions')
             ->with($mask)
             ->andReturn($this->permissions);
     }

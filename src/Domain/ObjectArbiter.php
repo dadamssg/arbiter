@@ -91,7 +91,7 @@ class ObjectArbiter implements ObjectArbiterInterface
         } catch (NoAceFoundException $e) {
         }
 
-        return $this->permissionsTransformer->toPermissions($mask);
+        return $this->permissionsTransformer->maskToPermissions($mask);
     }
 
 
@@ -102,14 +102,15 @@ class ObjectArbiter implements ObjectArbiterInterface
     {
         $this->ensureObjectIdentityPresent();
 
-        $userIdentity = $this->identityFactory->getUserIdentity($user);
-        $mask = $this->permissionsTransformer->toMask($permissions);
-
         try {
             $acl = $this->aclProvider->findAcl($this->objectIdentity);
         } catch (AclNotFoundException $e) {
             $acl = $this->aclProvider->createAcl($this->objectIdentity);
         }
+
+        $userIdentity = $this->identityFactory->getUserIdentity($user);
+
+        $mask = $this->permissionsTransformer->permissionsToMask($permissions);
 
         try {
             $indexedAce = $this->resolveIndexedAce($acl, $userIdentity);
