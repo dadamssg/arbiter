@@ -89,6 +89,10 @@ class PermissionsTransformer implements PermissionsTransformerInterface
      */
     public function arrayToPermissions(array $permissions = array())
     {
+        foreach ($permissions as $permission) {
+            $this->ensureValidPermission($permission);
+        }
+
         return $this->permissionsFactory->newPermissions($permissions);
     }
 
