@@ -67,4 +67,4 @@ services:
         arguments:[@security.acl.provider]
 ```
 
-> **Note:** Arbiter uses Symfony's [BasicPermissionMap](https://github.com/symfony/Security/blob/master/Acl/Permission/BasicPermissionMap.php) internally. Out of the box, the Arbiter is limited to those permissions.
+> **Note:** Arbiter uses Symfony's [BasicPermissionMap](https://github.com/symfony/Security/blob/master/Acl/Permission/BasicPermissionMap.php) internally. Out of the box, the Arbiter is limited to those permissions and is case-sensitive.
