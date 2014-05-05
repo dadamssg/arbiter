@@ -1,0 +1,99 @@
+<?php
+
+namespace ProgrammingAreHard\Arbiter\Domain;
+
+use ProgrammingAreHard\Arbiter\Model\PermissionMapInterface;
+use ProgrammingAreHard\Arbiter\Model\PermissionsFactoryInterface;
+use ProgrammingAreHard\Arbiter\Model\PermissionsInterface;
+use ProgrammingAreHard\Arbiter\Model\PermissionsTransformerInterface;
+
+class PermissionsTransformer implements PermissionsTransformerInterface
+{
+    /**
+     * @var PermissionMapInterface
+     */
+    protected $map;
+
+    /**
+     * @var PermissionsFactoryInterface
+     */
+    protected $permissionsFactory;
+
+    /**
+     * Constructor.
+     *
+     * @param PermissionMapInterface $map
+     * @param PermissionsFactoryInterface $permissionsFactory
+     */
+    public function __construct(
+        PermissionMapInterface $map = null,
+        PermissionsFactoryInterface $permissionsFactory = null
+    ) {
+        $this->map = $map ? : new PermissionMap;
+        $this->permissionsFactory = $permissionsFactory ? : new PermissionsFactory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toMask(PermissionsInterface $permissions)
+    {
+        $mask = 0;
+
+        foreach ($permissions as $permission) {
+
+            $this->ensureValidPermission($permission);
+
+            $mask |= $this->map->getMask($permission);
+        }
+
+        return $mask;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toMasks(PermissionsInterface $permissions)
+    {
+        $masks = array();
+
+        foreach ($permissions as $permission) {
+
+            $this->ensureValidPermission($permission);
+
+            $masks[] = $this->map->getMask($permission);
+        }
+
+        return $masks;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toPermissions($mask)
+    {
+        $permissions = array();
+
+        foreach ($this->map as $permission => $val) {
+
+            if ($mask & $val) {
+                $permissions[] = $this->map->getPermission($val);
+            }
+        }
+
+        return $this->permissionsFactory->newPermissions($permissions);
+    }
+
+    /**
+     * Check if valid permission.
+     *
+     * @param string $permission
+     * @throws \InvalidArgumentException
+     */
+    protected function ensureValidPermission($permission)
+    {
+        if (!$this->map->supportsPermission($permission)) {
+            throw new \InvalidArgumentException(sprintf('Unsupported permission: %s', $permission));
+        }
+    }
+}

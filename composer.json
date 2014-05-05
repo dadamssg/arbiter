@@ -16,11 +16,15 @@
         }
     },
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "symfony/security": "2.4.*"
     },
     "require-dev": {
-    	"symfony/security": "2.4.*",
-    	"phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.0",
+        "mockery/mockery": "0.9.*@dev"
+    },
+    "config": {
+        "bin-dir": "vendor/bin"
     },
     "minimum-stability": "dev",
     "extra": {

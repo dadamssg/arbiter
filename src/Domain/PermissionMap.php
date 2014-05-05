@@ -13,7 +13,7 @@ class PermissionMap implements PermissionMapInterface
      *
      * @var array
      */
-    protected $permissionMap = array(
+    protected $map = array(
         BasicPermissionMap::PERMISSION_VIEW => MaskBuilder::MASK_VIEW,
         BasicPermissionMap::PERMISSION_EDIT => MaskBuilder::MASK_EDIT,
         BasicPermissionMap::PERMISSION_CREATE => MaskBuilder::MASK_CREATE,
@@ -27,55 +27,32 @@ class PermissionMap implements PermissionMapInterface
     /**
      * {@inheritdoc}
      */
-    public function contains($permission)
+    public function getMask($permission)
     {
-        return array_key_exists($this->normalizePermission($permission), $this->permissionMap);
+        return $this->map[$permission];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function maskToPermissions($mask)
+    public function getPermission($mask)
     {
-        $permissions = array();
-
-        foreach ($this->permissionMap as $permission => $val) {
-
-            if ($mask & $val) {
-                $permissions[$val] = $this->normalizePermission($permission);
-            }
-        }
-
-        ksort($permissions);
-
-        return array_values($permissions);
+        return array_search($mask, $this->map);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function permissionsToMasks(array $permissions)
+    public function supportsPermission($permission)
     {
-        $masks = array();
-
-        foreach ($permissions as $permission) {
-            $permission = $this->normalizePermission($permission);
-            if (array_key_exists($permission, $this->permissionMap)) {
-                $masks[] = $this->permissionMap[$permission];
-            }
-        }
-
-        return $masks;
+        return array_key_exists($permission, $this->map);
     }
 
     /**
-     * Normalize the permission.
-     *
-     * @param string $permission
-     * @return string
+     * {@inheritdoc}
      */
-    protected function normalizePermission($permission)
+    public function getIterator()
     {
-        return strtoupper($permission);
+        return new \ArrayIterator($this->map);
     }
 } 

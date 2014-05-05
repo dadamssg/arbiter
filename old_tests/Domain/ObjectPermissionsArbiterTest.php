@@ -4,7 +4,7 @@ namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 
 use ProgrammingAreHard\Arbiter\Domain\IndexedAce;
 use ProgrammingAreHard\Arbiter\Domain\PermissionsMaskAggregator;
-use ProgrammingAreHard\Arbiter\Domain\ObjectPermissionsArbiter;
+use ProgrammingAreHard\Arbiter\Domain\ObjectArbiter;
 use ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface;
 use Symfony\Component\Security\Acl\Exception\AclNotFoundException;
@@ -22,7 +22,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
     const MASK = 128;
 
     /**
-     * @var ObjectPermissionsArbiter
+     * @var ObjectArbiter
      */
     private $arbiter;
 
@@ -81,7 +81,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->arbiter = new ObjectPermissionsArbiter(
+        $this->arbiter = new ObjectArbiter(
             $this->aclProvider = $this->getMock('Symfony\Component\Security\Acl\Model\MutableAclProviderInterface'),
             $this->aceResolver = $this->getMock('ProgrammingAreHard\Arbiter\Model\IndexedAceResolverInterface'),
             $this->identityFactory = $this->getMock('ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface'),
@@ -126,7 +126,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
      */
     public function granting_with_no_object_throws_exception()
     {
-        $this->arbiter->grant($this->user);
+        $this->arbiter->updatePermissions($this->user);
     }
 
     /**
@@ -145,7 +145,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 
         $this->arbiter
             ->setObject($this->object)
-            ->grant($this->user);
+            ->updatePermissions($this->user);
     }
 
     /**
@@ -163,7 +163,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 
         $this->arbiter
             ->setObject($this->object)
-            ->grant($this->user);
+            ->updatePermissions($this->user);
     }
 
     /**
@@ -181,7 +181,7 @@ class ObjectPermissionsArbiterTest extends \PHPUnit_Framework_TestCase
 
         $this->arbiter
             ->setObject($this->object)
-            ->grant($this->user);
+            ->updatePermissions($this->user);
     }
 
     /**

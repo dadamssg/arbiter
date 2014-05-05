@@ -2,29 +2,31 @@
 
 namespace ProgrammingAreHard\Arbiter\Model;
 
-interface PermissionMapInterface
+interface PermissionMapInterface extends \IteratorAggregate
 {
     /**
-     * Whether this map contains the given permission.
+     * Get the mask equivalent of the permission.
+     *
+     * @param string $permission
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getMask($permission);
+
+    /**
+     * Get the permission equivalent of the mask.
+     *
+     * @param int $mask
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getPermission($mask);
+
+    /**
+     * Does the map support the permission?
      *
      * @param string $permission
      * @return bool
      */
-    public function contains($permission);
-
-    /**
-     * Transform a bitmask to an array of permissions.
-     *
-     * @param int $mask
-     * @return string[]
-     */
-    public function maskToPermissions($mask);
-
-    /**
-     * Transform an array of permissions to bitmasks
-     *
-     * @param string[] $permissions
-     * @return int[]
-     */
-    public function permissionsToMasks(array $permissions);
+    public function supportsPermission($permission);
 } 
