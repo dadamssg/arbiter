@@ -10,10 +10,10 @@ Arbiter makes granting users different permissions for specific objects easy. It
 
 You don't need to worry about: ACL's, ACE's, object identities, security identies, mask builders, etc. 
 
-## Granting permisssions
+## Updating permisssions
 
 ```php
-use ProgrammingAreHard\Arbiter\Domain\ObjectPermissionsArbiter as Arbiter;
+use ProgrammingAreHard\Arbiter\Domain\ObjectArbiter as Arbiter;
 
 // get the acl provider from the container
 $aclProvider = $this->get('security.acl.provider');
@@ -27,53 +27,35 @@ $user = $this->get('security.context')->getToken()->getUser();
 // get an entity with an id
 $document = $this->get('document.repository')->find(1);
 
-// grant single permission
-$arbiter
-    ->setObject($document)
-    ->setPermissions('master')
-    ->grant($user);
+$arbiter->setObject($document);
 
-// or grant multiple permissions
-$arbiter
-    ->setObject($document)
-    ->setPermissions(['view', 'edit'])
-    ->grant($user);
-```
+// get the current permissions the user has access for the $document
+$permissions = $arbiter->getPermissions($user);
 
-> **Note:** Granting always adds to existing permissions if there are any. It never takes any away.
+// add permissions
+$permissions
+    ->add('VIEW')
+    ->add('EDIT');
 
-## Revoking permissions
+$arbiter->updatePermissions($user, $permissions);
 
-```php
-// revoke single permission
-$arbiter
-    ->setObject($task)
-    ->setPermissions('edit')
-    ->revoke($user);
+// remove permissions
 
-// or revoke multiple permissions
-$arbiter
-    ->setObject($task)
-    ->setPermissions(['view', 'edit'])
-    ->revoke($user);
+$permissions->remove('EDIT');
+
+$arbiter->updatePermissions($user, $permissions);
 ```
 
 ## Checking permissions
 
 ```php
 // check single permission
-$arbiter
-    ->setObject($project)
-    ->setPermissions('edit');
+$arbiter->setObject($project);
 
-$canEdit = $arbiter->isGranted($user); // bool
+$permissions = new Permissions;
+$permissions->add('EDIT');
 
-// check multiple permissions
-$arbiter
-    ->setObject($project)
-    ->setPermissions(['view', 'edit']);
-
-$canViewAndEdit = $arbiter->isGranted($user); // bool
+$canEdit = $arbiter->isGranted($user, $permissions); // bool
 ```
 
 ## Register Arbiter in Symfony's container
@@ -82,8 +64,8 @@ $canViewAndEdit = $arbiter->isGranted($user); // bool
 # services.yml
 
 services:
-    permissions.arbiter:
-        class: ProgrammingAreHard\Arbiter\Domain\ObjectPermissionsArbiter
+    object.arbiter:
+        class: ProgrammingAreHard\Arbiter\Domain\ObjectArbiter
         arguments:[@security.acl.provider]
 ```
 
