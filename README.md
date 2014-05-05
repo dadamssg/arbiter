@@ -24,9 +24,10 @@ $arbiter = new Arbiter($aclProvider);
 // get a user
 $user = $this->get('security.context')->getToken()->getUser();
 
-// get an entity with an id
+// get an entity
 $document = $this->get('document.repository')->find(1);
 
+// focus the arbiter on the $document
 $arbiter->setObject($document);
 
 // get the current permissions the user has access for the $document
@@ -37,10 +38,10 @@ $permissions
     ->add('VIEW')
     ->add('EDIT');
 
+// update permissions for user
 $arbiter->updatePermissions($user, $permissions);
 
 // remove permissions
-
 $permissions->remove('EDIT');
 
 $arbiter->updatePermissions($user, $permissions);
