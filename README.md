@@ -10,7 +10,7 @@ Arbiter makes granting users different permissions for specific objects easy. It
 
 You don't need to worry about: ACL's, ACE's, object identities, security identies, mask builders, etc. 
 
-## Updating permisssions
+## Updating permissions
 
 ```php
 use ProgrammingAreHard\Arbiter\Domain\ObjectArbiter as Arbiter;
