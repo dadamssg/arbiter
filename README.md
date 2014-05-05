@@ -30,7 +30,7 @@ $document = $this->get('document.repository')->find(1);
 // focus the arbiter on the $document
 $arbiter->setObject($document);
 
-// get the current permissions the user has access for the $document
+// get the current permissions the user has for the $document
 $permissions = $arbiter->getPermissions($user);
 
 // add permissions
