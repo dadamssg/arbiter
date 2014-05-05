@@ -13,13 +13,8 @@ You don't need to worry about: ACL's, ACE's, object identities, security identie
 ## Updating permissions
 
 ```php
-use ProgrammingAreHard\Arbiter\Domain\ObjectArbiter as Arbiter;
-
-// get the acl provider from the container
-$aclProvider = $this->get('security.acl.provider');
-
-// instantiate the Arbiter
-$arbiter = new Arbiter($aclProvider);
+// get the arbiter
+$arbiter = $this->get('object.arbiter');
 
 // get a user
 $user = $this->get('security.context')->getToken()->getUser();
@@ -27,7 +22,7 @@ $user = $this->get('security.context')->getToken()->getUser();
 // get an entity
 $document = $this->get('document.repository')->find(1);
 
-// focus the arbiter on the $document
+// focus the arbiter on an entity
 $arbiter->setObject($document);
 
 // get the current permissions the user has for the $document
