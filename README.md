@@ -44,6 +44,7 @@ $arbiter->updatePermissions($user, $permissions);
 // remove permissions
 $permissions->remove('EDIT');
 
+// update permissions for user
 $arbiter->updatePermissions($user, $permissions);
 ```
 

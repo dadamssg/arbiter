@@ -5,6 +5,7 @@ namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 use ProgrammingAreHard\Arbiter\Domain\ObjectArbiter;
 use ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\ObjectArbiterInterface;
+use ProgrammingAreHard\Arbiter\Model\PermissionsFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsTransformerInterface;
 use Symfony\Component\Security\Acl\Dbal\MutableAclProvider;
