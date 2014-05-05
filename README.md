@@ -67,4 +67,4 @@ services:
         arguments:[@security.acl.provider]
 ```
 
-> **Note:** Arbiter uses the MaskBuilder internally. This means, out of the box, it is limited to the [MaskBuilder's permissions](https://github.com/symfony/Security/blob/master/Acl/Permission/MaskBuilder.php#L20).
+> **Note:** Arbiter uses Symfony's [BasicPermissionMap](https://github.com/symfony/Security/blob/master/Acl/Permission/BasicPermissionMap.php).
