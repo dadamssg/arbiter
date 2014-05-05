@@ -136,7 +136,7 @@ class ObjectArbiter implements ObjectArbiterInterface
     {
         $this->ensureObjectIdentityPresent();
 
-        if (!$masks = $this->permissionsTransformer->toMasks($permissions)) {
+        if (!$masks = $this->permissionsTransformer->permissionsToMasks($permissions)) {
             return true;
         }
 
