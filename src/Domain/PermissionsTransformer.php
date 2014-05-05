@@ -36,7 +36,7 @@ class PermissionsTransformer implements PermissionsTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function toMask(PermissionsInterface $permissions)
+    public function permissionsToMask(PermissionsInterface $permissions)
     {
         $mask = 0;
 
@@ -53,7 +53,7 @@ class PermissionsTransformer implements PermissionsTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function toMasks(PermissionsInterface $permissions)
+    public function permissionsToMasks(PermissionsInterface $permissions)
     {
         $masks = array();
 
@@ -70,7 +70,7 @@ class PermissionsTransformer implements PermissionsTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function toPermissions($mask)
+    public function maskToPermissions($mask)
     {
         $permissions = array();
 
@@ -81,6 +81,14 @@ class PermissionsTransformer implements PermissionsTransformerInterface
             }
         }
 
+        return $this->permissionsFactory->newPermissions($permissions);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function arrayToPermissions(array $permissions = array())
+    {
         return $this->permissionsFactory->newPermissions($permissions);
     }
 

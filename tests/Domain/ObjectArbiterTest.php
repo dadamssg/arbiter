@@ -5,19 +5,15 @@ namespace ProgrammingAreHard\Arbiter\Tests\Domain;
 use ProgrammingAreHard\Arbiter\Domain\ObjectArbiter;
 use ProgrammingAreHard\Arbiter\Model\IdentityFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\ObjectArbiterInterface;
-use ProgrammingAreHard\Arbiter\Model\PermissionsFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsTransformerInterface;
 use Symfony\Component\Security\Acl\Dbal\MutableAclProvider;
-use Mockery as m;
-use Symfony\Component\Security\Acl\Domain\Entry;
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Acl\Exception\AclNotFoundException;
 use Symfony\Component\Security\Acl\Model\AclInterface;
-use Symfony\Component\Security\Acl\Model\EntryInterface;
 use Symfony\Component\Security\Acl\Model\ObjectIdentityInterface;
 use Symfony\Component\Security\Acl\Model\SecurityIdentityInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Mockery as m;
 
 class ObjectArbiterTest extends \PHPUnit_Framework_TestCase
 {

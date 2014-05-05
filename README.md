@@ -51,12 +51,13 @@ $arbiter->updatePermissions($user, $permissions);
 ## Checking permissions
 
 ```php
-// check single permission
+// get a permissions object
+$permissions = $arbiter->newPermissions(array('EDIT');
+
+// focus the arbiter on the entity
 $arbiter->setObject($project);
 
-$permissions = new Permissions;
-$permissions->add('EDIT');
-
+// check permissions
 $canEdit = $arbiter->isGranted($user, $permissions); // bool
 ```
 

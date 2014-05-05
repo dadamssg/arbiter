@@ -28,14 +28,14 @@ class ObjectArbiter implements ObjectArbiterInterface
     protected $aclProvider;
 
     /**
-     * @var IdentityFactoryInterface
-     */
-    protected $identityFactory;
-
-    /**
      * @var PermissionsTransformerInterface
      */
     protected $permissionsTransformer;
+
+    /**
+     * @var IdentityFactoryInterface
+     */
+    protected $identityFactory;
 
     /**
      * Constructor.
@@ -62,6 +62,14 @@ class ObjectArbiter implements ObjectArbiterInterface
         $this->objectIdentity = $this->identityFactory->getObjectIdentity($object);
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function newPermissions(array $permissions = array())
+    {
+        return $this->permissionsTransformer->arrayToPermissions($permissions);
     }
 
     /**

@@ -4,7 +4,7 @@ namespace ProgrammingAreHard\Arbiter\Model;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-interface ArbiterInterface
+interface ArbiterInterface extends PermissionsFactoryInterface
 {
     /**
      * Get the user's permissions.

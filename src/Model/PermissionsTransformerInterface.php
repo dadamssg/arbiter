@@ -10,7 +10,7 @@ interface PermissionsTransformerInterface
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function toMask(PermissionsInterface $permissions);
+    public function permissionsToMask(PermissionsInterface $permissions);
 
     /**
      * Convert the permissions to an array of bitmasks.
@@ -19,7 +19,7 @@ interface PermissionsTransformerInterface
      * @return int[]
      * @throws \InvalidArgumentException
      */
-    public function toMasks(PermissionsInterface $permissions);
+    public function permissionsToMasks(PermissionsInterface $permissions);
 
     /**
      * Conver the bitmask to permissions.
@@ -27,5 +27,13 @@ interface PermissionsTransformerInterface
      * @param int $mask
      * @return PermissionsInterface
      */
-    public function toPermissions($mask);
+    public function maskToPermissions($mask);
+
+    /**
+     * Transform array to permissions.
+     *
+     * @param string[] $permissions
+     * @return PermissionsInterface
+     */
+    public function arrayToPermissions(array $permissions = array());
 }

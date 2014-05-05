@@ -56,7 +56,7 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
         $permissions->shouldReceive('getIterator')->andReturn(new \ArrayIterator(array('foo', 'bar')));
         $this->map->shouldReceive('supportsPermission')->with('foo')->andReturn(false);
 
-        $this->transformer->toMask($permissions);
+        $this->transformer->permissionsToMask($permissions);
     }
 
     /**
@@ -71,7 +71,7 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
         $this->map->shouldReceive('getMask')->with('foo')->andReturn(1);
         $this->map->shouldReceive('getMask')->with('bar')->andReturn(4);
 
-        $mask = $this->transformer->toMask($permissions);
+        $mask = $this->transformer->permissionsToMask($permissions);
 
         $this->assertEquals(1 | 4, $mask);
     }
@@ -87,7 +87,7 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
         $permissions->shouldReceive('getIterator')->andReturn(new \ArrayIterator(array('foo', 'bar')));
         $this->map->shouldReceive('supportsPermission')->with('foo')->andReturn(false);
 
-        $this->transformer->toMasks($permissions);
+        $this->transformer->permissionsToMasks($permissions);
     }
 
     /**
@@ -102,7 +102,7 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
         $this->map->shouldReceive('getMask')->with('foo')->andReturn(1);
         $this->map->shouldReceive('getMask')->with('bar')->andReturn(4);
 
-        $masks = $this->transformer->toMasks($permissions);
+        $masks = $this->transformer->permissionsToMasks($permissions);
 
         $this->assertEquals(array(1, 4), $masks);
     }
@@ -127,7 +127,7 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
         $this->map->shouldReceive('getPermission')->with($editMask)->andReturn($editPerm);
         $this->factory->shouldReceive('newPermissions')->with(array($viewPerm, $editPerm));
 
-        $this->transformer->toPermissions($viewMask | $editMask);
+        $this->transformer->maskToPermissions($viewMask | $editMask);
     }
 
     /**
@@ -143,6 +143,6 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
         $this->map->shouldReceive('getIterator')->andReturn(new \ArrayIterator($map));
         $this->factory->shouldReceive('newPermissions')->with(array());
 
-        $this->transformer->toPermissions(0);
+        $this->transformer->maskToPermissions(0);
     }
 } 
