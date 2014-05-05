@@ -52,7 +52,7 @@ $arbiter->updatePermissions($user, $permissions);
 
 ```php
 // get a permissions object
-$permissions = $arbiter->newPermissions(array('EDIT');
+$permissions = $arbiter->newPermissions(array('EDIT'));
 
 // focus the arbiter on the entity
 $arbiter->setObject($project);
