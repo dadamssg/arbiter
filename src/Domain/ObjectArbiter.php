@@ -172,7 +172,7 @@ class ObjectArbiter implements ObjectArbiterInterface
     }
 
     /**
-     * Guard against no object.
+     * Guard against no object identity.
      *
      * @throws \InvalidArgumentException
      */
