@@ -133,6 +133,15 @@ class ObjectArbiterTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function it_uses_permissions_factory_to_create_new_permissions()
+    {
+        $this->expectArrayIsTransformedToPermissions($perms = array());
+        $this->arbiter->newPermissions($perms);
+    }
+
+    /**
+     * @test
+     */
     public function it_transforms_mask_from_ace_to_permissions_acl_is_found()
     {
         $userIdentity = $this->expectUserIdentityIsCreated($this->user);
@@ -334,6 +343,14 @@ class ObjectArbiterTest extends \PHPUnit_Framework_TestCase
         $this->transformer
             ->shouldReceive('maskToPermissions')
             ->with($mask)
+            ->andReturn($this->permissions);
+    }
+
+    private function expectArrayIsTransformedToPermissions(array $permissions = array())
+    {
+        $this->transformer
+            ->shouldReceive('newPermissions')
+            ->with($permissions)
             ->andReturn($this->permissions);
     }
 
