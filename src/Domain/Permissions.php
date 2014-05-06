@@ -74,4 +74,12 @@ class Permissions implements PermissionsInterface
     {
         return new \ArrayIterator($this->permissions);
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return implode(',', $this->permissions);
+    }
 }
