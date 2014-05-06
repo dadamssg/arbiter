@@ -69,7 +69,7 @@ class ObjectArbiter implements ObjectArbiterInterface
      */
     public function newPermissions(array $permissions = array())
     {
-        return $this->permissionsTransformer->arrayToPermissions($permissions);
+        return $this->permissionsTransformer->newPermissions($permissions);
     }
 
     /**

@@ -1,7 +1,8 @@
 <?php
+
 namespace ProgrammingAreHard\Arbiter\Model;
 
-interface PermissionsTransformerInterface
+interface PermissionsTransformerInterface extends PermissionsFactoryInterface
 {
     /**
      * Convert permissions to a bitmask.
@@ -28,12 +29,4 @@ interface PermissionsTransformerInterface
      * @return PermissionsInterface
      */
     public function maskToPermissions($mask);
-
-    /**
-     * Transform array to permissions.
-     *
-     * @param string[] $permissions
-     * @return PermissionsInterface
-     */
-    public function arrayToPermissions(array $permissions = array());
 }
