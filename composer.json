@@ -21,7 +21,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
-        "mockery/mockery": "0.9.*@dev"
+        "mockery/mockery": "0.9.*@dev",
+        "satooshi/php-coveralls": "dev-master"
     },
     "config": {
         "bin-dir": "vendor/bin"
