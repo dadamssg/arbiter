@@ -1,6 +1,7 @@
 ## Arbiter
 
 [![Build Status](https://travis-ci.org/dadamssg/arbiter.svg?branch=master)](https://travis-ci.org/dadamssg/Arbiter)
+[![Coverage Status](https://coveralls.io/repos/dadamssg/arbiter/badge.png?branch=master)](https://coveralls.io/r/dadamssg/arbiter?branch=master)
 
 > **Note:** Arbiter assumes [Symfony's security component](https://packagist.org/packages/symfony/security) ACL's have already been [set up](http://symfony.com/doc/current/cookbook/security/acl.html).
 
