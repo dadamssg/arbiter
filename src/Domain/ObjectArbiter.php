@@ -161,7 +161,7 @@ class ObjectArbiter implements ObjectArbiterInterface
      * @return \ProgrammingAreHard\Arbiter\Domain\IndexedAce
      * @throws \Symfony\Component\Security\Acl\Exception\NoAceFoundException
      */
-    public function resolveIndexedAce(AclInterface $acl, SecurityIdentityInterface $sid)
+    private function resolveIndexedAce(AclInterface $acl, SecurityIdentityInterface $sid)
     {
         foreach ($acl->getObjectAces() as $index => $ace) {
             if ($ace->getSecurityIdentity()->equals($sid)) {

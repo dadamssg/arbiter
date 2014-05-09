@@ -23,7 +23,7 @@ interface PermissionsTransformerInterface extends PermissionsFactoryInterface
     public function permissionsToMasks(PermissionsInterface $permissions);
 
     /**
-     * Conver the bitmask to permissions.
+     * Convert the bitmask to permissions.
      *
      * @param int $mask
      * @return PermissionsInterface
