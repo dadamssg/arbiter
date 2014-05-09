@@ -27,6 +27,11 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
     private $factory;
 
     /**
+     * @var PermissionsInterface
+     */
+    private $permissions;
+
+    /**
      * Setup.
      */
     public function setUp()
@@ -35,6 +40,8 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
             $this->map = m::mock('ProgrammingAreHard\Arbiter\Model\PermissionMapInterface'),
             $this->factory = m::mock('ProgrammingAreHard\Arbiter\Model\PermissionsFactoryInterface')
         );
+
+        $this->permissions = m::mock('ProgrammingAreHard\Arbiter\Model\PermissionsInterface');
     }
 
     /**
@@ -54,7 +61,7 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
     {
         $permissions = m::mock('ProgrammingAreHard\Arbiter\Model\PermissionsInterface');
         $permissions->shouldReceive('getIterator')->andReturn(new \ArrayIterator(array('foo', 'bar')));
-        $this->map->shouldReceive('supportsPermission')->with('foo')->andReturn(false);
+        $this->supportsPermissions(array('foo' => false));
 
         $this->transformer->permissionsToMask($permissions);
     }
@@ -66,10 +73,9 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
     {
         $permissions = m::mock('ProgrammingAreHard\Arbiter\Model\PermissionsInterface');
         $permissions->shouldReceive('getIterator')->andReturn(new \ArrayIterator(array('foo', 'bar')));
-        $this->map->shouldReceive('supportsPermission')->with('foo')->andReturn(true);
-        $this->map->shouldReceive('supportsPermission')->with('bar')->andReturn(true);
-        $this->map->shouldReceive('getMask')->with('foo')->andReturn(1);
-        $this->map->shouldReceive('getMask')->with('bar')->andReturn(4);
+
+        $this->supportsPermissions(array('foo' => true, 'bar' => true));
+        $this->getMask(array('foo' => 1, 'bar' => 4));
 
         $mask = $this->transformer->permissionsToMask($permissions);
 
@@ -85,7 +91,7 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
     {
         $permissions = m::mock('ProgrammingAreHard\Arbiter\Model\PermissionsInterface');
         $permissions->shouldReceive('getIterator')->andReturn(new \ArrayIterator(array('foo', 'bar')));
-        $this->map->shouldReceive('supportsPermission')->with('foo')->andReturn(false);
+        $this->supportsPermissions(array('foo' => false));
 
         $this->transformer->permissionsToMasks($permissions);
     }
@@ -97,10 +103,8 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
     {
         $permissions = m::mock('ProgrammingAreHard\Arbiter\Model\PermissionsInterface');
         $permissions->shouldReceive('getIterator')->andReturn(new \ArrayIterator(array('foo', 'bar')));
-        $this->map->shouldReceive('supportsPermission')->with('foo')->andReturn(true);
-        $this->map->shouldReceive('supportsPermission')->with('bar')->andReturn(true);
-        $this->map->shouldReceive('getMask')->with('foo')->andReturn(1);
-        $this->map->shouldReceive('getMask')->with('bar')->andReturn(4);
+        $this->supportsPermissions(array('foo' => true, 'bar' => true));
+        $this->getMask(array('foo' => 1, 'bar' => 4));
 
         $masks = $this->transformer->permissionsToMasks($permissions);
 
@@ -144,5 +148,54 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
         $this->factory->shouldReceive('newPermissions')->with(array());
 
         $this->transformer->maskToPermissions(0);
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function it_checks_supported_permissions_when_creating_new_permissions_from_an_array()
+    {
+        $perms = array('foo', 'bar');
+        $this->supportsPermissions(array('foo' => true, 'bar' => false));
+
+        $this->transformer->newPermissions($perms);
+    }
+
+    /**
+     * @test
+     */
+    public function it_uses_factory_to_create_new_permissions()
+    {
+        $perms = array('foo', 'bar');
+        $this->supportsPermissions(array('foo' => true, 'bar' => true));
+        $this->expectFactoryToBeUsed($perms);
+
+        $permissions = $this->transformer->newPermissions($perms);
+
+        $this->assertSame($this->permissions, $permissions);
+    }
+
+    private function expectFactoryToBeUsed(array $permissions)
+    {
+        $this->factory
+            ->shouldReceive('newPermissions')
+            ->with($permissions)
+            ->andReturn($this->permissions);
+    }
+
+    private function supportsPermissions(array $perms)
+    {
+        foreach ($perms as $permission => $isSupported) {
+            $this->map->shouldReceive('supportsPermission')->with($permission)->andReturn($isSupported);
+        }
+    }
+
+    private function getMask(array $masks)
+    {
+        foreach ($masks as $permission => $mask) {
+            $this->map->shouldReceive('getMask')->with($permission)->andReturn($mask);
+        }
     }
 } 

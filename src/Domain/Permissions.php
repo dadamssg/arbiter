@@ -76,6 +76,14 @@ class Permissions implements PermissionsInterface
     }
 
     /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->permissions);
+    }
+
+    /**
      * @return string
      */
     public function __toString()

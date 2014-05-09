@@ -134,16 +134,17 @@ class ObjectArbiter implements ObjectArbiterInterface
      */
     public function isGranted(UserInterface $user, PermissionsInterface $permissions)
     {
-        $this->ensureObjectIdentityPresent();
-
-        if (!$masks = $this->permissionsTransformer->permissionsToMasks($permissions)) {
+        if (0 === count($permissions)) {
             return true;
         }
+
+        $this->ensureObjectIdentityPresent();
 
         $userIdentity = $this->identityFactory->getUserIdentity($user);
 
         try {
             $acl = $this->aclProvider->findAcl($this->objectIdentity);
+            $masks = $this->permissionsTransformer->permissionsToMasks($permissions);
             return $acl->isGranted($masks, array($userIdentity));
         } catch (AclNotFoundException $e) {
         } catch (NoAceFoundException $e) {

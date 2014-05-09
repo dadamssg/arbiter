@@ -224,7 +224,6 @@ class ObjectArbiterTest extends \PHPUnit_Framework_TestCase
     public function it_creates_acl_when_no_acl_is_found_when_updating_permissions()
     {
         $object = new \stdClass;
-
         $userIdentity = $this->expectUserIdentityIsCreated($this->user);
         $objectIdentity = $this->expectObjectIdentityIsCreated($object);
         $this->noAclIsFound($objectIdentity);
@@ -237,6 +236,82 @@ class ObjectArbiterTest extends \PHPUnit_Framework_TestCase
         $this->arbiter
             ->setObject($object)
             ->updatePermissions($this->user, $this->permissions);
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function it_throws_exception_when_checking_permissions_with_no_object()
+    {
+        $this->expectPermissionsCount(2);
+
+        $this->arbiter->isGranted($this->user, $this->permissions);
+    }
+
+    /**
+     * @test
+     */
+    public function it_grants_access_if_no_permissions()
+    {
+        $this->expectPermissionsCount(0);
+        $granted = $this->arbiter->isGranted($this->user, $this->permissions);
+
+        $this->assertTrue($granted);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_grant_access_if_no_acl()
+    {
+        $this->expectPermissionsCount(2);
+        $object = new \stdClass;
+        $this->expectUserIdentityIsCreated($this->user);
+        $objectIdentity = $this->expectObjectIdentityIsCreated($object);
+        $this->noAclIsFound($objectIdentity);
+
+        $granted = $this->arbiter
+            ->setObject($object)
+            ->isGranted($this->user, $this->permissions);
+
+        $this->assertFalse($granted);
+    }
+
+    /**
+     * @test
+     */
+    public function it_uses_acl_to_check_access()
+    {
+        $this->expectPermissionsCount(2);
+        $object = new \stdClass;
+        $userIdentity = $this->expectUserIdentityIsCreated($this->user);
+        $objectIdentity = $this->expectObjectIdentityIsCreated($object);
+        $this->expectPermissionsAreTransformedToMasks($masks = array(1, 3, 5));
+        $acl = $this->aclIsFound($objectIdentity);
+        $this->expectAccessIsCheckedAgainstAcl($acl, $userIdentity, $masks, $accessGranted = true);
+
+        $granted = $this->arbiter
+            ->setObject($object)
+            ->isGranted($this->user, $this->permissions);
+
+        $this->assertTrue($granted);
+    }
+
+    private function expectAccessIsCheckedAgainstAcl(AclInterface $acl, SecurityIdentityInterface $sid, array $masks = array(), $granted = true)
+    {
+        $acl
+            ->shouldReceive('isGranted')
+            ->with($masks, array($sid))
+            ->andReturn($granted);
+    }
+
+    private function expectPermissionsCount($count = 0)
+    {
+        $this->permissions
+            ->shouldReceive('count')
+            ->andReturn($count);
     }
 
     private function expectAclWasUpdated(AclInterface $acl)
@@ -336,6 +411,14 @@ class ObjectArbiterTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('permissionsToMask')
             ->with($this->permissions)
             ->andReturn($mask);
+    }
+
+    private function expectPermissionsAreTransformedToMasks(array $masks = array())
+    {
+        $this->transformer
+            ->shouldReceive('permissionsToMasks')
+            ->with($this->permissions)
+            ->andReturn($masks);
     }
 
     private function expectMaskIsTransformedToPermissions($mask = 0)

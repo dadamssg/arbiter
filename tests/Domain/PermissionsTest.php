@@ -90,4 +90,27 @@ class PermissionsTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue(in_array($permission, $perms));
         }
     }
+
+    /**
+     * @test
+     */
+    public function it_should_be_countable()
+    {
+        $permissions = new Permissions;
+        $this->assertEquals(0, count($permissions));
+
+        $permissions = new Permissions(array('foo', 'bar', 'baz'));
+        $this->assertEquals(3, count($permissions));
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_be_cast_to_a_string()
+    {
+        $perms = array('foo', 'bar');
+        $permissions = new Permissions($perms);
+
+        $this->assertEquals('foo,bar', (string) $permissions);
+    }
 } 

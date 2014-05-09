@@ -2,7 +2,7 @@
 
 namespace ProgrammingAreHard\Arbiter\Model;
 
-interface PermissionsInterface extends \IteratorAggregate
+interface PermissionsInterface extends \IteratorAggregate, \Countable
 {
     /**
      * Does the permissions have the permission?
