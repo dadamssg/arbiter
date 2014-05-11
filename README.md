@@ -11,6 +11,8 @@ Arbiter makes granting users different permissions for specific objects easy. It
 
 You don't need to worry about: ACL's, ACE's, object identities, security identities, mask builders, etc.
 
+Read the [generated API documentation](http://dadamssg.github.io/arbiter/) or view code samples below.
+
 ## Updating permissions
 
 ```php
