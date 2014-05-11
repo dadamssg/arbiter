@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="ApiGen 2.8.0">
+
+	<title>Interface Symfony\Component\Security\Acl\Model\AuditableAclInterface | Arbiter</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2639749737"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li><a href="namespace-ProgrammingAreHard.html">ProgrammingAreHard<span></span></a>
+						<ul>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.html">Arbiter<span></span></a>
+						<ul>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.Domain.html">Domain</a>
+						</li>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.Model.html">Model</a>
+						</li>
+							</ul></li></ul></li>
+				<li class="active"><a href="namespace-Symfony.html">Symfony<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.html">Component<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.Security.html">Security<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.Security.Acl.html">Acl<span></span></a>
+						<ul>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Exception.html">Exception</a>
+						</li>
+				<li class="active"><a href="namespace-Symfony.Component.Security.Acl.Model.html">Model</a>
+						</li>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Permission.html">Permission</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Symfony.Component.Security.Core.html">Core<span></span></a>
+						<ul>
+				<li><a href="namespace-Symfony.Component.Security.Core.User.html">User</a>
+						</li>
+							</ul></li></ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.AclCacheInterface.html">AclCacheInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html">AclInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.AclProviderInterface.html">AclProviderInterface</a></li>
+				<li class="active"><a href="class-Symfony.Component.Security.Acl.Model.AuditableAclInterface.html">AuditableAclInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.AuditableEntryInterface.html">AuditableEntryInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.AuditLoggerInterface.html">AuditLoggerInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.DomainObjectInterface.html">DomainObjectInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.EntryInterface.html">EntryInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.FieldEntryInterface.html">FieldEntryInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html">MutableAclInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.MutableAclProviderInterface.html">MutableAclProviderInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.ObjectIdentityInterface.html">ObjectIdentityInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.ObjectIdentityRetrievalStrategyInterface.html">ObjectIdentityRetrievalStrategyInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.PermissionGrantingStrategyInterface.html">PermissionGrantingStrategyInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.SecurityIdentityInterface.html">SecurityIdentityInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Acl.Model.SecurityIdentityRetrievalStrategyInterface.html">SecurityIdentityRetrievalStrategyInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text">
+		<input type="submit" value="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Symfony.Component.Security.Acl.Model.html" title="Summary of Symfony\Component\Security\Acl\Model"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Interface AuditableAclInterface</h1>
+
+
+	<div class="description">
+	
+<p>This interface adds auditing capabilities to the ACL.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>Symfony\Component\Security\Acl\Model\AuditableAclInterface</span></b>			
+			 implements 
+				<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html"><span>Symfony\Component\Security\Acl\Model\MutableAclInterface</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Symfony.html">Symfony</a>\<a href="namespace-Symfony.Component.html">Component</a>\<a href="namespace-Symfony.Component.Security.html">Security</a>\<a href="namespace-Symfony.Component.Security.Acl.html">Acl</a>\<a href="namespace-Symfony.Component.Security.Acl.Model.html">Model</a><br>
+		
+
+				<b>Author:</b>
+				Johannes M. Schmitt &lt;<a
+href="mailto:schmittjoh&#64;gmail.com">schmittjoh&#64;<!-- -->gmail.com</a>&gt;<br>
+		<b>Located at</b> <a href="source-class-Symfony.Component.Security.Acl.Model.AuditableAclInterface.html#14-58" title="Go to source code">AuditableAclInterface.php</a><br>
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="updateClassAuditing" id="_updateClassAuditing">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateClassAuditing">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Model.AuditableAclInterface.html#21-28" title="Go to source code">updateClassAuditing</a>( <span>integer <var>$index</var></span>, <span>boolean <var>$auditSuccess</var></span>, <span>boolean <var>$auditFailure</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Updates auditing for class-based ACE</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Updates auditing for class-based ACE</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$index</var></dt>
+					<dd><code>integer</code><br>$index</dd>
+					<dt><var>$auditSuccess</var></dt>
+					<dd><code>boolean</code><br>$auditSuccess</dd>
+					<dt><var>$auditFailure</var></dt>
+					<dd><code>boolean</code><br>$auditFailure</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="updateClassFieldAuditing" id="_updateClassFieldAuditing">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateClassFieldAuditing">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Model.AuditableAclInterface.html#30-38" title="Go to source code">updateClassFieldAuditing</a>( <span>integer <var>$index</var></span>, <span>string <var>$field</var></span>, <span>boolean <var>$auditSuccess</var></span>, <span>boolean <var>$auditFailure</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Updates auditing for class-field-based ACE</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Updates auditing for class-field-based ACE</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$index</var></dt>
+					<dd><code>integer</code><br>$index</dd>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+					<dt><var>$auditSuccess</var></dt>
+					<dd><code>boolean</code><br>$auditSuccess</dd>
+					<dt><var>$auditFailure</var></dt>
+					<dd><code>boolean</code><br>$auditFailure</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="updateObjectAuditing" id="_updateObjectAuditing">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateObjectAuditing">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Model.AuditableAclInterface.html#40-47" title="Go to source code">updateObjectAuditing</a>( <span>integer <var>$index</var></span>, <span>boolean <var>$auditSuccess</var></span>, <span>boolean <var>$auditFailure</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Updates auditing for object-based ACE</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Updates auditing for object-based ACE</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$index</var></dt>
+					<dd><code>integer</code><br>$index</dd>
+					<dt><var>$auditSuccess</var></dt>
+					<dd><code>boolean</code><br>$auditSuccess</dd>
+					<dt><var>$auditFailure</var></dt>
+					<dd><code>boolean</code><br>$auditFailure</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="updateObjectFieldAuditing" id="_updateObjectFieldAuditing">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateObjectFieldAuditing">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Model.AuditableAclInterface.html#49-57" title="Go to source code">updateObjectFieldAuditing</a>( <span>integer <var>$index</var></span>, <span>string <var>$field</var></span>, <span>boolean <var>$auditSuccess</var></span>, <span>boolean <var>$auditFailure</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Updates auditing for object-field-based ACE</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Updates auditing for object-field-based ACE</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$index</var></dt>
+					<dd><code>integer</code><br>$index</dd>
+					<dt><var>$field</var></dt>
+					<dd><code>string</code><br>$field</dd>
+					<dt><var>$auditSuccess</var></dt>
+					<dd><code>boolean</code><br>$auditSuccess</dd>
+					<dt><var>$auditFailure</var></dt>
+					<dd><code>boolean</code><br>$auditFailure</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#methods">Symfony\Component\Security\Acl\Model\MutableAclInterface</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_deleteClassAce">deleteClassAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_deleteClassFieldAce">deleteClassFieldAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_deleteObjectAce">deleteObjectAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_deleteObjectFieldAce">deleteObjectFieldAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_getId">getId()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_insertClassAce">insertClassAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_insertClassFieldAce">insertClassFieldAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_insertObjectAce">insertObjectAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_insertObjectFieldAce">insertObjectFieldAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_setEntriesInheriting">setEntriesInheriting()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_setParentAcl">setParentAcl()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_updateClassAce">updateClassAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_updateClassFieldAce">updateClassFieldAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_updateObjectAce">updateObjectAce()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.MutableAclInterface.html#_updateObjectFieldAce">updateObjectFieldAce()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Serializable.html#methods">Serializable</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Serializable.html#_serialize">serialize()</a>, 
+			<a href="class-Serializable.html#_unserialize">unserialize()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#methods">Symfony\Component\Security\Acl\Model\AclInterface</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_getClassAces">getClassAces()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_getClassFieldAces">getClassFieldAces()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_getObjectAces">getObjectAces()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_getObjectFieldAces">getObjectFieldAces()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_getObjectIdentity">getObjectIdentity()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_getParentAcl">getParentAcl()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_isEntriesInheriting">isEntriesInheriting()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_isFieldGranted">isFieldGranted()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_isGranted">isGranted()</a>, 
+			<a href="class-Symfony.Component.Security.Acl.Model.AclInterface.html#_isSidLoaded">isSidLoaded()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Arbiter API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
