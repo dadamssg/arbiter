@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="ApiGen 2.8.0">
+
+	<title>Class Symfony\Component\Security\Acl\Permission\MaskBuilder | Arbiter</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2639749737"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li><a href="namespace-ProgrammingAreHard.html">ProgrammingAreHard<span></span></a>
+						<ul>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.html">Arbiter<span></span></a>
+						<ul>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.Domain.html">Domain</a>
+						</li>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.Model.html">Model</a>
+						</li>
+							</ul></li></ul></li>
+				<li class="active"><a href="namespace-Symfony.html">Symfony<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.html">Component<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.Security.html">Security<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.Security.Acl.html">Acl<span></span></a>
+						<ul>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Exception.html">Exception</a>
+						</li>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Model.html">Model</a>
+						</li>
+				<li class="active"><a href="namespace-Symfony.Component.Security.Acl.Permission.html">Permission</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-Symfony.Component.Security.Core.html">Core<span></span></a>
+						<ul>
+				<li><a href="namespace-Symfony.Component.Security.Core.User.html">User</a>
+						</li>
+							</ul></li></ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Symfony.Component.Security.Acl.Permission.BasicPermissionMap.html">BasicPermissionMap</a></li>
+				<li class="active"><a href="class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html">MaskBuilder</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Symfony.Component.Security.Acl.Permission.PermissionMapInterface.html">PermissionMapInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text">
+		<input type="submit" value="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Symfony.Component.Security.Acl.Permission.html" title="Summary of Symfony\Component\Security\Acl\Permission"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class MaskBuilder</h1>
+
+
+	<div class="description">
+	
+<p>This class allows you to build cumulative permissions easily, or convert
+masks to a human-readable format.</p>
+
+<pre>
+<span class="php-var">$builder</span> = <span
+class="php-keyword1">new</span> MaskBuilder();
+<span
+class="php-var">$builder</span>
+    -&gt;add(<span
+class="php-quote">'view'</span>)
+    -&gt;add(<span
+class="php-quote">'create'</span>)
+    -&gt;add(<span
+class="php-quote">'edit'</span>)
+;
+<span
+class="php-keyword2">var_dump</span>(<span
+class="php-var">$builder</span>-&gt;get());        <span
+class="php-comment">// int(7)</span>
+<span
+class="php-keyword2">var_dump</span>(<span
+class="php-var">$builder</span>-&gt;getPattern()); <span
+class="php-comment">// string(32) &quot;.............................ECV&quot;</span>
+</pre>
+
+<p>We have defined some commonly used base permissions which you can use:</p>
+
+<ul>
+	<li>VIEW: the SID is allowed to view the domain object / field</li>
+
+	<li>CREATE: the SID is allowed to create new instances of the domain object /
+	fields</li>
+
+	<li>EDIT: the SID is allowed to edit existing instances of the domain object /
+	field</li>
+
+	<li>DELETE: the SID is allowed to delete domain objects</li>
+
+	<li>UNDELETE: the SID is allowed to recover domain objects from trash</li>
+
+	<li>OPERATOR: the SID is allowed to perform any action on the domain object
+	except for granting others permissions</li>
+
+	<li>MASTER: the SID is allowed to perform any action on the domain object, and
+	is allowed to grant other SIDs any permission except for MASTER and OWNER
+	permissions</li>
+
+	<li>OWNER: the SID is owning the domain object in question and can perform any
+	action on the domain object as well as grant any permission</li>
+</ul>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Symfony.html">Symfony</a>\<a href="namespace-Symfony.Component.html">Component</a>\<a href="namespace-Symfony.Component.Security.html">Security</a>\<a href="namespace-Symfony.Component.Security.Acl.html">Acl</a>\<a href="namespace-Symfony.Component.Security.Acl.Permission.html">Permission</a><br>
+		
+
+				<b>Author:</b>
+				Johannes M. Schmitt &lt;<a
+href="mailto:schmittjoh&#64;gmail.com">schmittjoh&#64;<!-- -->gmail.com</a>&gt;<br>
+		<b>Located at</b> <a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#14-209" title="Go to source code">MaskBuilder.php</a><br>
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#72-86" title="Go to source code">__construct</a>( <span>integer <var>$mask</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mask</var></dt>
+					<dd><code>integer</code><br>$mask optional; defaults to 0</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="add" id="_add">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html">Symfony\Component\Security\Acl\Permission\MaskBuilder</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_add">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#88-108" title="Go to source code">add</a>( <span>mixed <var>$mask</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Adds a mask to the permission</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Adds a mask to the permission</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mask</var></dt>
+					<dd><code>mixed</code><br>$mask</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html">Symfony\Component\Security\Acl\Permission\MaskBuilder</a></code></code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#110-118" title="Go to source code">get</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the mask of this permission</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the mask of this permission</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPattern" id="_getPattern">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPattern">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#120-142" title="Go to source code">getPattern</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns a human-readable representation of the permission</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a human-readable representation of the permission</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="remove" id="_remove">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html">Symfony\Component\Security\Acl\Permission\MaskBuilder</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_remove">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#144-164" title="Go to source code">remove</a>( <span>mixed <var>$mask</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Removes a mask from the permission</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Removes a mask from the permission</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mask</var></dt>
+					<dd><code>mixed</code><br>$mask</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html">Symfony\Component\Security\Acl\Permission\MaskBuilder</a></code></code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reset" id="_reset">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html">Symfony\Component\Security\Acl\Permission\MaskBuilder</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reset">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#166-176" title="Go to source code">reset</a>( )</code>
+
+		<div class="description short">
+			
+<p>Resets the PermissionBuilder</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Resets the PermissionBuilder</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html">Symfony\Component\Security\Acl\Permission\MaskBuilder</a></code></code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCode" id="_getCode">
+
+		<td class="attributes"><code>
+			 public static
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCode">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#178-208" title="Go to source code">getCode</a>( <span>integer <var>$mask</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the code for the passed mask</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the code for the passed mask</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mask</var></dt>
+					<dd><code>integer</code><br>$mask</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>
+					<code><code><a href="class-RuntimeException.html">RuntimeException</a></code></code><br>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="MASK_VIEW" id="MASK_VIEW">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#47" title="Go to source code"><b>MASK_VIEW</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_VIEW" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MASK_CREATE" id="MASK_CREATE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#48" title="Go to source code"><b>MASK_CREATE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">2</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_CREATE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MASK_EDIT" id="MASK_EDIT">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#49" title="Go to source code"><b>MASK_EDIT</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">4</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_EDIT" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MASK_DELETE" id="MASK_DELETE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#50" title="Go to source code"><b>MASK_DELETE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">8</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_DELETE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MASK_UNDELETE" id="MASK_UNDELETE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#51" title="Go to source code"><b>MASK_UNDELETE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">16</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_UNDELETE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MASK_OPERATOR" id="MASK_OPERATOR">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#52" title="Go to source code"><b>MASK_OPERATOR</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">32</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_OPERATOR" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MASK_MASTER" id="MASK_MASTER">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#53" title="Go to source code"><b>MASK_MASTER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">64</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_MASTER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MASK_OWNER" id="MASK_OWNER">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#54" title="Go to source code"><b>MASK_OWNER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">128</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_OWNER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MASK_IDDQD" id="MASK_IDDQD">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#55" title="Go to source code"><b>MASK_IDDQD</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1073741823</span></code></td>
+		<td class="description"><div>
+			<a href="#MASK_IDDQD" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CODE_VIEW" id="CODE_VIEW">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#57" title="Go to source code"><b>CODE_VIEW</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'V'</span></code></td>
+		<td class="description"><div>
+			<a href="#CODE_VIEW" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CODE_CREATE" id="CODE_CREATE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#58" title="Go to source code"><b>CODE_CREATE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'C'</span></code></td>
+		<td class="description"><div>
+			<a href="#CODE_CREATE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CODE_EDIT" id="CODE_EDIT">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#59" title="Go to source code"><b>CODE_EDIT</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'E'</span></code></td>
+		<td class="description"><div>
+			<a href="#CODE_EDIT" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CODE_DELETE" id="CODE_DELETE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#60" title="Go to source code"><b>CODE_DELETE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'D'</span></code></td>
+		<td class="description"><div>
+			<a href="#CODE_DELETE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CODE_UNDELETE" id="CODE_UNDELETE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#61" title="Go to source code"><b>CODE_UNDELETE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'U'</span></code></td>
+		<td class="description"><div>
+			<a href="#CODE_UNDELETE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CODE_OPERATOR" id="CODE_OPERATOR">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#62" title="Go to source code"><b>CODE_OPERATOR</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'O'</span></code></td>
+		<td class="description"><div>
+			<a href="#CODE_OPERATOR" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CODE_MASTER" id="CODE_MASTER">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#63" title="Go to source code"><b>CODE_MASTER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'M'</span></code></td>
+		<td class="description"><div>
+			<a href="#CODE_MASTER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="CODE_OWNER" id="CODE_OWNER">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#64" title="Go to source code"><b>CODE_OWNER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'N'</span></code></td>
+		<td class="description"><div>
+			<a href="#CODE_OWNER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ALL_OFF" id="ALL_OFF">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#66" title="Go to source code"><b>ALL_OFF</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'................................'</span></code></td>
+		<td class="description"><div>
+			<a href="#ALL_OFF" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="OFF" id="OFF">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#67" title="Go to source code"><b>OFF</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'.'</span></code></td>
+		<td class="description"><div>
+			<a href="#OFF" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="ON" id="ON">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-Symfony.Component.Security.Acl.Permission.MaskBuilder.html#68" title="Go to source code"><b>ON</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'*'</span></code></td>
+		<td class="description"><div>
+			<a href="#ON" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Arbiter API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

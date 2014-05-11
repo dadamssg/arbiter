@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="ApiGen 2.8.0">
+
+	<title>Class Symfony\Component\Security\Core\User\ChainUserProvider | Arbiter</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2639749737"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li><a href="namespace-ProgrammingAreHard.html">ProgrammingAreHard<span></span></a>
+						<ul>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.html">Arbiter<span></span></a>
+						<ul>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.Domain.html">Domain</a>
+						</li>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.Model.html">Model</a>
+						</li>
+							</ul></li></ul></li>
+				<li class="active"><a href="namespace-Symfony.html">Symfony<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.html">Component<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.Security.html">Security<span></span></a>
+						<ul>
+				<li><a href="namespace-Symfony.Component.Security.Acl.html">Acl<span></span></a>
+						<ul>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Exception.html">Exception</a>
+						</li>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Model.html">Model</a>
+						</li>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Permission.html">Permission</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="namespace-Symfony.Component.Security.Core.html">Core<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.Security.Core.User.html">User</a>
+						</li>
+							</ul></li></ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Symfony.Component.Security.Core.User.ChainUserProvider.html">ChainUserProvider</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.InMemoryUserProvider.html">InMemoryUserProvider</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.User.html">User</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.UserChecker.html">UserChecker</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Symfony.Component.Security.Core.User.AdvancedUserInterface.html">AdvancedUserInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.EquatableInterface.html">EquatableInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.UserCheckerInterface.html">UserCheckerInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">UserInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.UserProviderInterface.html">UserProviderInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text">
+		<input type="submit" value="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Symfony.Component.Security.Core.User.html" title="Summary of Symfony\Component\Security\Core\User"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class ChainUserProvider</h1>
+
+
+	<div class="description">
+	
+<p>Chain User Provider.</p>
+
+<p>This provider calls several leaf providers in a chain until one is able to
+handle the request.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>Symfony\Component\Security\Core\User\ChainUserProvider</span></b>			
+			 implements 
+				<a href="class-Symfony.Component.Security.Core.User.UserProviderInterface.html"><span>Symfony\Component\Security\Core\User\UserProviderInterface</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Symfony.html">Symfony</a>\<a href="namespace-Symfony.Component.html">Component</a>\<a href="namespace-Symfony.Component.Security.html">Security</a>\<a href="namespace-Symfony.Component.Security.Core.html">Core</a>\<a href="namespace-Symfony.Component.Security.Core.User.html">User</a><br>
+		
+
+				<b>Author:</b>
+				Johannes M. Schmitt &lt;<a
+href="mailto:schmittjoh&#64;gmail.com">schmittjoh&#64;<!-- -->gmail.com</a>&gt;<br>
+		<b>Located at</b> <a href="source-class-Symfony.Component.Security.Core.User.ChainUserProvider.html#17-100" title="Go to source code">ChainUserProvider.php</a><br>
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.ChainUserProvider.html#29-32" title="Go to source code">__construct</a>( <span>array <var>$providers</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getProviders" id="_getProviders">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getProviders">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.ChainUserProvider.html#34-40" title="Go to source code">getProviders</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadUserByUsername" id="_loadUserByUsername">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">Symfony\Component\Security\Core\User\UserInterface</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadUserByUsername">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.ChainUserProvider.html#42-58" title="Go to source code">loadUserByUsername</a>( <span>string <var>$username</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Loads the user for the given username.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Loads the user for the given username.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$username</var></dt>
+					<dd><code>string</code><br>$username The username</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">Symfony\Component\Security\Core\User\UserInterface</a></code></code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>Symfony\Component\Security\Core\Exception\UsernameNotFoundException</code><br>if the user is not found<br>
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Symfony.Component.Security.Core.User.UserProviderInterface.html#_loadUserByUsername">Symfony\Component\Security\Core\User\UserProviderInterface::loadUserByUsername()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="refreshUser" id="_refreshUser">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">Symfony\Component\Security\Core\User\UserInterface</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_refreshUser">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.ChainUserProvider.html#60-85" title="Go to source code">refreshUser</a>( <span><code><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">Symfony\Component\Security\Core\User\UserInterface</a></code> <var>$user</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Refreshes the user for the account interface.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Refreshes the user for the account interface.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd><code><code><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">Symfony\Component\Security\Core\User\UserInterface</a></code></code><br>$user</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">Symfony\Component\Security\Core\User\UserInterface</a></code></code><br>
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code>Symfony\Component\Security\Core\Exception\UnsupportedUserException</code><br>if the account is not supported<br>
+				</div>
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Symfony.Component.Security.Core.User.UserProviderInterface.html#_refreshUser">Symfony\Component\Security\Core\User\UserProviderInterface::refreshUser()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="supportsClass" id="_supportsClass">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_supportsClass">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.ChainUserProvider.html#87-99" title="Go to source code">supportsClass</a>( <span>string <var>$class</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Whether this provider supports the given user class</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Whether this provider supports the given user class</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$class</var></dt>
+					<dd><code>string</code><br>$class</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-Symfony.Component.Security.Core.User.UserProviderInterface.html#_supportsClass">Symfony\Component\Security\Core\User\UserProviderInterface::supportsClass()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Arbiter API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

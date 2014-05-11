@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="ApiGen 2.8.0">
+
+	<title>Interface Symfony\Component\Security\Core\User\AdvancedUserInterface | Arbiter</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?2639749737"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li><a href="namespace-ProgrammingAreHard.html">ProgrammingAreHard<span></span></a>
+						<ul>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.html">Arbiter<span></span></a>
+						<ul>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.Domain.html">Domain</a>
+						</li>
+				<li><a href="namespace-ProgrammingAreHard.Arbiter.Model.html">Model</a>
+						</li>
+							</ul></li></ul></li>
+				<li class="active"><a href="namespace-Symfony.html">Symfony<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.html">Component<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.Security.html">Security<span></span></a>
+						<ul>
+				<li><a href="namespace-Symfony.Component.Security.Acl.html">Acl<span></span></a>
+						<ul>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Exception.html">Exception</a>
+						</li>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Model.html">Model</a>
+						</li>
+				<li><a href="namespace-Symfony.Component.Security.Acl.Permission.html">Permission</a>
+						</li>
+							</ul></li>
+				<li class="active"><a href="namespace-Symfony.Component.Security.Core.html">Core<span></span></a>
+						<ul>
+				<li class="active"><a href="namespace-Symfony.Component.Security.Core.User.html">User</a>
+						</li>
+							</ul></li></ul></li></ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Symfony.Component.Security.Core.User.ChainUserProvider.html">ChainUserProvider</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.InMemoryUserProvider.html">InMemoryUserProvider</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.User.html">User</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.UserChecker.html">UserChecker</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li class="active"><a href="class-Symfony.Component.Security.Core.User.AdvancedUserInterface.html">AdvancedUserInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.EquatableInterface.html">EquatableInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.UserCheckerInterface.html">UserCheckerInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">UserInterface</a></li>
+				<li><a href="class-Symfony.Component.Security.Core.User.UserProviderInterface.html">UserProviderInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text">
+		<input type="submit" value="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Symfony.Component.Security.Core.User.html" title="Summary of Symfony\Component\Security\Core\User"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Interface AdvancedUserInterface</h1>
+
+
+	<div class="description">
+	
+<p>Adds extra features to a user class related to account status flags.</p>
+
+<p>This interface can be implemented in place of UserInterface if you'd like the
+authentication system to consider different account status flags during
+authentication. If any of the methods in this interface return false,
+authentication will fail.</p>
+
+<p>If you need to perform custom logic for any of these situations, then you
+will need to register an exception listener and watch for the specific exception
+instances thrown in each case. All exceptions are a subclass of
+AccountStatusException</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>Symfony\Component\Security\Core\User\AdvancedUserInterface</span></b>			
+			 implements 
+				<a href="class-Symfony.Component.Security.Core.User.UserInterface.html"><span>Symfony\Component\Security\Core\User\UserInterface</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+	<div>
+		<h4>Direct known implementers</h4>
+			<a href="class-Symfony.Component.Security.Core.User.User.html">Symfony\Component\Security\Core\User\User</a>
+	</div>
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Symfony.html">Symfony</a>\<a href="namespace-Symfony.Component.html">Component</a>\<a href="namespace-Symfony.Component.Security.html">Security</a>\<a href="namespace-Symfony.Component.Security.Core.html">Core</a>\<a href="namespace-Symfony.Component.Security.Core.User.html">User</a><br>
+		
+
+				<b>Author:</b>
+				Fabien Potencier &lt;<a
+href="mailto:fabien&#64;symfony.com">fabien&#64;<!-- -->symfony.com</a>&gt;<br>
+				<b>See:</b>
+				<code><code><a href="class-Symfony.Component.Security.Core.User.UserInterface.html">Symfony\Component\Security\Core\User\UserInterface</a></code></code><br>
+				<b>See:</b>
+				AccountStatusException<br>
+		<b>Located at</b> <a href="source-class-Symfony.Component.Security.Core.User.AdvancedUserInterface.html#20-87" title="Go to source code">AdvancedUserInterface.php</a><br>
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="isAccountNonExpired" id="_isAccountNonExpired">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isAccountNonExpired">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.AdvancedUserInterface.html#40-50" title="Go to source code">isAccountNonExpired</a>( )</code>
+
+		<div class="description short">
+			
+<p>Checks whether the user's account has expired.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks whether the user's account has expired.</p>
+
+<p>Internally, if this method returns false, the authentication system will
+throw an AccountExpiredException and prevent login.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true if the user's account is non expired, false otherwise<br>
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						AccountExpiredException<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAccountNonLocked" id="_isAccountNonLocked">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isAccountNonLocked">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.AdvancedUserInterface.html#52-62" title="Go to source code">isAccountNonLocked</a>( )</code>
+
+		<div class="description short">
+			
+<p>Checks whether the user is locked.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks whether the user is locked.</p>
+
+<p>Internally, if this method returns false, the authentication system will
+throw a LockedException and prevent login.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true if the user is not locked, false otherwise<br>
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						LockedException<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isCredentialsNonExpired" id="_isCredentialsNonExpired">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isCredentialsNonExpired">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.AdvancedUserInterface.html#64-74" title="Go to source code">isCredentialsNonExpired</a>( )</code>
+
+		<div class="description short">
+			
+<p>Checks whether the user's credentials (password) has expired.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks whether the user's credentials (password) has expired.</p>
+
+<p>Internally, if this method returns false, the authentication system will
+throw a CredentialsExpiredException and prevent login.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true if the user's credentials are non expired, false otherwise<br>
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						CredentialsExpiredException<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEnabled" id="_isEnabled">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isEnabled">#</a>
+		<code><a href="source-class-Symfony.Component.Security.Core.User.AdvancedUserInterface.html#76-86" title="Go to source code">isEnabled</a>( )</code>
+
+		<div class="description short">
+			
+<p>Checks whether the user is enabled.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks whether the user is enabled.</p>
+
+<p>Internally, if this method returns false, the authentication system will
+throw a DisabledException and prevent login.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true if the user is enabled, false otherwise<br>
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						DisabledException<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Symfony.Component.Security.Core.User.UserInterface.html#methods">Symfony\Component\Security\Core\User\UserInterface</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Symfony.Component.Security.Core.User.UserInterface.html#_eraseCredentials">eraseCredentials()</a>, 
+			<a href="class-Symfony.Component.Security.Core.User.UserInterface.html#_getPassword">getPassword()</a>, 
+			<a href="class-Symfony.Component.Security.Core.User.UserInterface.html#_getRoles">getRoles()</a>, 
+			<a href="class-Symfony.Component.Security.Core.User.UserInterface.html#_getSalt">getSalt()</a>, 
+			<a href="class-Symfony.Component.Security.Core.User.UserInterface.html#_getUsername">getUsername()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Arbiter API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
