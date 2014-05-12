@@ -61,6 +61,55 @@ $arbiter->setObject($project);
 $canEdit = $arbiter->isGranted($user, $permissions); // bool
 ```
 
+## Suggestions
+
+Only check against a single permission even though the `Permissions` object can contain several. The security component, by default, will grant access if the user has any one of the permissions contained in the `Permissions` object. For example:
+
+```php
+// get a permissions object
+$permissions = $arbiter->newPermissions(array('EDIT', 'OPERATOR'));
+
+// focus the arbiter on the entity
+$arbiter->setObject($document);
+
+// check permissions
+$granted = $arbiter->isGranted($user, $permissions); // bool
+```
+
+If the user has an ACE entry for either `EDIT` or `OPERATOR`, access is granted. Checking against multiple permissions at the same time can cause confusion.
+
+# Gotchas
+
+Because of the bitmask implementation of Symfony's ACL system, removing permissions isn't as straight-forward as one might think. Consider the following example:
+
+```php
+// get a permissions object
+$permissions = $arbiter->newPermissions(array('OPERATOR'));
+
+// focus the arbiter on the entity
+$arbiter->setObject($project);
+
+// grant permissions
+$arbiter->grant($user, $permissions);
+
+// time passes and you need to adjust the user's permissions.
+
+$permissions = $arbiter->getPermissions($user);
+
+$permissions->remove('DELETE');
+
+// update permissions
+$arbiter->grant($user, $permissions);
+```
+
+Because the `OPERATOR` permission infers the `DELETE` permission in Symfony's security system,
+one might think you can simply remove it and assume the `$user` has every CRUD permission except `DELETE`.
+This is false and the wrong way to think about it. The `$user` will still have the `OPERATOR` permission which
+still includes the `DELETE` permission.
+
+Instead, a better approach would be to create a new `Permissions` object with only the explicit permissions the `$user` should
+hold. This new `Permissions` object should be used in a `$arbiter->grant($user, $permissions)` method call.
+
 ## Register Arbiter in Symfony's container
 
 ```yml
