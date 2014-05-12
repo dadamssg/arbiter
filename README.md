@@ -110,7 +110,7 @@ This is false and the wrong way to think about it. The `$user` will still have t
 still includes the `DELETE` permission.
 
 Instead, a better approach would be to create a new `Permissions` object with only the explicit permissions the `$user` should
-hold. This new `Permissions` object should be used in a `$arbiter->grant($user, $permissions)` method call.
+hold. This new `Permissions` object should be used in a `$arbiter->updatePermissions($user, $permissions)` method call.
 
 ## Register Arbiter in Symfony's container
 
