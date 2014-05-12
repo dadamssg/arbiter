@@ -94,8 +94,10 @@ $arbiter->grant($user, $permissions);
 
 // time passes and you need to adjust the user's permissions.
 
+// get the permissions the $user currently has for the $project
 $permissions = $arbiter->getPermissions($user);
 
+// remove the DELETE permission
 $permissions->remove('DELETE');
 
 // update permissions
