@@ -90,7 +90,7 @@ $permissions = $arbiter->newPermissions(array('OPERATOR'));
 $arbiter->setObject($project);
 
 // grant permissions
-$arbiter->grant($user, $permissions);
+$arbiter->updatePermissions($user, $permissions);
 
 // time passes and you need to adjust the user's permissions.
 
@@ -101,7 +101,7 @@ $permissions = $arbiter->getPermissions($user);
 $permissions->remove('DELETE');
 
 // update permissions
-$arbiter->grant($user, $permissions);
+$arbiter->updatePermissions($user, $permissions);
 ```
 
 Because the `OPERATOR` permission infers the `DELETE` permission in Symfony's security system,
