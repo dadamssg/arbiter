@@ -4,10 +4,17 @@ namespace ProgrammingAreHard\Arbiter\Domain;
 
 use ProgrammingAreHard\Arbiter\Model\PermissionMapInterface;
 use Symfony\Component\Security\Acl\Permission\BasicPermissionMap;
+use Symfony\Component\Security\Acl\Permission\PermissionMapInterface as BasicMapInterface;
+
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 class PermissionMap implements PermissionMapInterface
 {
+    /**
+     * @var BasicMapInterface
+     */
+    protected $basicMap;
+
     /**
      * Permission => mask map
      *
@@ -25,11 +32,29 @@ class PermissionMap implements PermissionMapInterface
     );
 
     /**
+     * Constructor.
+     *
+     * @param BasicMapInterface $basicMap
+     */
+    public function __construct(BasicMapInterface $basicMap)
+    {
+        $this->basicMap = $basicMap;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getMask($permission)
     {
         return $this->map[$permission];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMasks($permission)
+    {
+        return $this->basicMap->getMasks($permission, $permission);
     }
 
     /**

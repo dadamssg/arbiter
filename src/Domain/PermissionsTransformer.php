@@ -6,6 +6,7 @@ use ProgrammingAreHard\Arbiter\Model\PermissionMapInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsFactoryInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsInterface;
 use ProgrammingAreHard\Arbiter\Model\PermissionsTransformerInterface;
+use Symfony\Component\Security\Acl\Permission\BasicPermissionMap;
 
 class PermissionsTransformer implements PermissionsTransformerInterface
 {
@@ -29,7 +30,7 @@ class PermissionsTransformer implements PermissionsTransformerInterface
         PermissionMapInterface $map = null,
         PermissionsFactoryInterface $permissionsFactory = null
     ) {
-        $this->map = $map ? : new PermissionMap;
+        $this->map = $map ? : new PermissionMap(new BasicPermissionMap);
         $this->permissionsFactory = $permissionsFactory ? : new PermissionsFactory;
     }
 
@@ -61,10 +62,10 @@ class PermissionsTransformer implements PermissionsTransformerInterface
 
             $this->ensureValidPermission($permission);
 
-            $masks[] = $this->map->getMask($permission);
+            $masks = array_merge($masks, $this->map->getMasks($permission));
         }
 
-        return $masks;
+        return array_unique($masks);
     }
 
     /**

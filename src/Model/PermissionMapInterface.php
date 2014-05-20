@@ -14,6 +14,14 @@ interface PermissionMapInterface extends \IteratorAggregate
     public function getMask($permission);
 
     /**
+     * Get the masks associated with the permission.
+     *
+     * @param string $permission
+     * @return int[]
+     */
+    public function getMasks($permission);
+
+    /**
      * Get the permission equivalent of the mask.
      *
      * @param int $mask
