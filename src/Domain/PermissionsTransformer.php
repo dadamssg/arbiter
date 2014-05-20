@@ -30,7 +30,7 @@ class PermissionsTransformer implements PermissionsTransformerInterface
         PermissionMapInterface $map = null,
         PermissionsFactoryInterface $permissionsFactory = null
     ) {
-        $this->map = $map ? : new PermissionMap(new BasicPermissionMap);
+        $this->map = $map ? : new PermissionMap;
         $this->permissionsFactory = $permissionsFactory ? : new PermissionsFactory;
     }
 
