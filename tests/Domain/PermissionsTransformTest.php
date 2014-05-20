@@ -104,7 +104,7 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
         $permissions = m::mock('ProgrammingAreHard\Arbiter\Model\PermissionsInterface');
         $permissions->shouldReceive('getIterator')->andReturn(new \ArrayIterator(array('foo', 'bar')));
         $this->supportsPermissions(array('foo' => true, 'bar' => true));
-        $this->getMask(array('foo' => 1, 'bar' => 4));
+        $this->getMasks(array('foo' => array(1), 'bar' => array(4)));
 
         $masks = $this->transformer->permissionsToMasks($permissions);
 
@@ -196,6 +196,13 @@ class PermissionsTransformTest extends \PHPUnit_Framework_TestCase
     {
         foreach ($masks as $permission => $mask) {
             $this->map->shouldReceive('getMask')->with($permission)->andReturn($mask);
+        }
+    }
+
+    private function getMasks(array $masks)
+    {
+        foreach ($masks as $permission => $mask) {
+            $this->map->shouldReceive('getMasks')->with($permission)->andReturn($mask);
         }
     }
 } 
